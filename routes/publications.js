@@ -18,9 +18,6 @@ router.get('/lastPublications', async function(req, res, next){
   
     if(latest.length == 3){
         result = true
-
-       // console.log(latest)
-       // console.log("nbre articles: ", latest.length)
       }
 
     res.json({result, latest})
@@ -59,7 +56,7 @@ router.get('/allPublications', async function(req, res, next){
  
   if(allPublications){
       result = true
-      //console.log("all: ", allPublications)
+      
     }
 
     
@@ -160,18 +157,52 @@ router.delete('/deleteComment', async function(req, res, next){
 })
 
 
-router.get('/nouveaute', async function(req, res, next){
-  id = req.query.id;
 
-  var publication = await publicationModel.findById(id);
-  var publiToDisplay = publication
+//Poster une publication
 
-  if(publiToDisplay){
-    result = true
+router.post('/post-publication', async function(req, res, next){
+  var error = []
+  var result = false
+  var savePublication
+  var user = await userModel.findOne({token: req.body.token})
+  
+  var idd = user.id
+
+
+  console.log('onclick back', req.body)
+
+
+  if(req.body.titrePublication == ''
+  || req.body.contenuPublication == ''
+  ){
+    error.push('champs vides')
   }
-  res.json({result, publiToDisplay, id})
-}) 
 
+  if(error.length == 0){
+    var newPublication = new publicationModel({
+      thematique: req.body.themePublication,
+      titre: req.body.titrePublication,
+      texte: req.body.contenuPublication,
+      image: req.body.image,
+      date_publication: req.body.datePublication,
+      statut: false,
+      motsCle: req.body.motClePublication,
+      user_id: idd,
+    })
+  
+    savePublication = await newPublication.save()
+ 
+var id = ''    
+    
+    if(savePublication){
+      result = true
+      id = savePublication.id
+    }
+  }
 
+  console.log('publiID', id)
+
+    res.json({result, id})
+  })
 
 module.exports = router;

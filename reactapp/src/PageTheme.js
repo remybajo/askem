@@ -1,63 +1,33 @@
-import React, { useState, useEffect, useRef } from "react";
-import { Link, Redirect, useParams } from "react-router-dom";
+import React, { useState, useEffect } from "react";
+import { Link,  useParams } from "react-router-dom";
 import {
   Layout,
   Menu,
   Card,
-  Row,
   Col,
   Tabs,
   Space,
   List,
   Statistic,
-  Image,
-  Button,
-  Divider,
 
 } from "antd";
 import "antd/dist/antd.css";
 import {
-  SettingOutlined,
-  EditOutlined,
-  EllipsisOutlined,
-  DownloadOutlined,
-  TwitterOutlined,
-  FacebookOutlined,
-  LinkedinOutlined,
-  UserOutlined,
+  
   MessageOutlined,
   LikeOutlined,
   StarOutlined,
-  MailOutlined,
-  CalendarOutlined,
-  AppstoreOutlined,
-  LinkOutlined,
-  DownCircleFilled,
-  SolutionOutlined,
+
   ArrowRightOutlined,
-  EditFilled,
+
 } from "@ant-design/icons";
-import EnTete from "./EnTete";
-import SideBarDroite from "./SideBarDroite";
+import SideBarDroite from "./Components/SideBarDroite";
 import "antd/dist/antd.css";
-import Politique from "../src/image/Politique.jpg";
-import Education from "../src/image/Education.jpg";
-import Emploi from "../src/image/Emploi.jpg";
-import Environnement from "../src/image/Environnement.jpg";
-import Evenement from "../src/image/Evenement.jpg";
-import Remarquer from "../src/image/Remarquer.jpg";
-import Sport from "../src/image/Sport.jpg";
-import Tourisme from "../src/image/Tourisme.jpg";
-import PiedDePage from "./piedDePage";
-import AGORA from "../src/image/AGORA.png"
-import SearchBar from "./Components/SearchBar";
-import Header from "./Header";
+import PiedDePage from "./Components/piedDePage";
+import Header from "./Components/Header";
 
-const { Content, Footer, Sider } = Layout;
-const { SubMenu } = Menu;
+const { Content} = Layout;
 
-const { Meta } = Card;
-const { TabPane } = Tabs;
 
 const listData = [];
 for (let i = 0; i < 23; i++) {

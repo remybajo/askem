@@ -2,42 +2,31 @@ import {
   Button,
   Layout,
   Menu,
-  Breadcrumb,
-  Image,
   Card,
-  Avatar,
   Divider,
   Row,
   Col,
   Tabs,
   List,
-  Space,
-  Tag,
-  BackTop,
-  Badge,
-  Modal,
-  Carousel,
   Statistic,
-  Skeleton,
-  message,
+
 } from "antd";
-import { Link, Redirect } from "react-router-dom";
+import { Link } from "react-router-dom";
 import "antd/dist/antd.css";
 import { connect } from "react-redux";
-import { ArrowUpOutlined, ArrowDownOutlined, UserOutlined, EditFilled } from "@ant-design/icons";
+import {  UserOutlined, EditFilled } from "@ant-design/icons";
 import InfiniteScroll from "react-infinite-scroll-component";
-import Inscription from "./inscription";
-import SearchBar from "./Components/SearchBar";
-import EnTete from "./EnTete";
-import SideBarDroite from "./SideBarDroite";
-import PiedDePage from "./piedDePage";
-import AGORA from "../src/image/AGORA.png"
-import React, { useState, useEffect } from "react";
-import Header from "./Header";
-import { set } from "mongoose";
 
-const {  Content, Footer, Sider } = Layout;
-const { SubMenu } = Menu;
+
+import SideBarDroite from "./Components/SideBarDroite";
+import PiedDePage from "./Components/piedDePage";
+
+import React, { useState, useEffect } from "react";
+import Header from "./Components/Header";
+
+
+const {  Content} = Layout;
+
 const { TabPane } = Tabs;
 
 
@@ -94,17 +83,7 @@ function PageProfil(props) {
     // cherche()
   }, []);
 
-  // useEffect(() => {
-  //   const ProfilVote = async () => {
-  //     var rawResponse = await fetch(`/commentarticle?token=${props.token}`);
-  //     const vote = await rawResponse.json();
-  //     const votePublication = vote.publicationVote;
-  //     setVoteArticle(votePublication);
-  //     console.log(votePublication);
-  //   };
-  //   ProfilVote();
-  //   // cherche()
-  // }, []);
+
 
   const loadMoreData = () => {
     if (loading) {

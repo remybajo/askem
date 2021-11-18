@@ -3,47 +3,25 @@ import React, { useState, useEffect, useRef } from "react";
 import Inscription from "./inscription";
 import { connect } from "react-redux";
 import {
-  Button,
   Layout,
   Menu,
-  Image,
-  Card,
-  Avatar,
-  Divider,
-  Row,
-  Col,
-  Tabs,
   Modal,
 } from "antd";
 import "antd/dist/antd.css";
 import {
-  SettingOutlined,
   EditOutlined,
-  EllipsisOutlined,
-  DownloadOutlined,
-  TwitterOutlined,
-  FacebookOutlined,
-  LinkedinOutlined,
-  UserOutlined,
-  MessageOutlined,
-  LikeOutlined,
-  StarOutlined,
   MailOutlined,
   CalendarOutlined,
   AppstoreOutlined,
-  LinkOutlined,
 } from "@ant-design/icons";
-const { Content, Footer, Sider } = Layout;
+const { Sider } = Layout;
 const { SubMenu } = Menu;
 
-const { Meta } = Card;
-const { TabPane } = Tabs;
+
 
 function SideBarDroite(props) {
   const [isModalVisible, setIsModalVisible] = useState(false);
-  const [isConnect, setIsConnect] = useState(false);
-  const [isConnectProfil, setIsConnectProfil] = useState(false);
-  // const [theme, setTheme] = useState("")
+
 
   //Base de donnée Data
   const themeData = [
@@ -74,19 +52,6 @@ function SideBarDroite(props) {
     setIsModalVisible(false);
   };
 
-  // var handleClickPubli = (e) => {
-  //   if (props.token == null) {
-  //     showModal();
-  //   } else {
-  //     setIsConnectProfil(true);
-  //   }
-  // };
-
- 
-
-  // if (isConnectProfil) {
-  //   return <Redirect to="/nouvelPublication" />;
-  // }
 
   var publiTheme = themeData.map((theme, i) => {
     return (
@@ -120,7 +85,7 @@ function SideBarDroite(props) {
         </SubMenu>
         {props.token ?
         <Menu.Item
-          //onClick={() => handleClick()}
+         
           key="2"
           icon={<CalendarOutlined />}
         > <Link to="/pageprofil">Mon compte</Link>

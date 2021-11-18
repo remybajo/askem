@@ -1,67 +1,32 @@
 
-import './App.css';
+import "./App.css"
 
 import { connect } from 'react-redux'
-import React, { useState, useEffect, useRef } from "react";
-import { Link, Redirect } from "react-router-dom";
+import React, { useState} from "react";
+import { Redirect } from "react-router-dom";
 import {
   Layout,
-  Menu,
-  Breadcrumb,
   Button,
   Image,
   Cascader,
   Select,
-  Card,
   Form,
-  Avatar,
   Divider,
   Row,
   Col,
   InputNumber,
-  Tabs,
-  List,
-  Space,
-  Tag,
   BackTop,
-  Badge,
-  Modal,
-  Statistic,
 } from "antd";
 import "antd/dist/antd.css";
 
-import {
-  SettingOutlined,
-  EditOutlined,
-  EllipsisOutlined,
-  DownloadOutlined,
-  TwitterOutlined,
-  FacebookOutlined,
-  LinkedinOutlined,
-  UserOutlined,
-  MessageOutlined,
-  LikeOutlined,
-  StarOutlined,
-  MailOutlined,
-  CalendarOutlined,
-  AppstoreOutlined,
-  LinkOutlined,
-  DownCircleFilled,
-  SolutionOutlined,
-  ArrowUpOutlined,
-  EditFilled,
-} from "@ant-design/icons";
-import SideBarDroite from "./SideBarDroite";
-import EnTete from "./EnTete";
 
 
-const { Header, Content, Footer, Sider } = Layout;
+import SideBarDroite from "./Components/SideBarDroite";
 
 
+const { Content, Footer,  } = Layout;
 
-const { Option } = Select;
-//import { CookiesProvider } from "react-cookie";
-//import Cookies from 'js-cookie';
+
 
 
 

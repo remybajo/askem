@@ -32,8 +32,8 @@ import {
   CardSubtitle,
 } from "reactstrap";
 
-import EnTete from "./EnTete";
-import SideBarDroite from "./SideBarDroite";
+
+import SideBarDroite from "./Components/SideBarDroite";
 
 import Politique from "../src/image/Politique.jpg";
 import Education from "../src/image/Education.jpg";
@@ -43,10 +43,9 @@ import Evenement from "../src/image/Evenement.jpg";
 import Remarquer from "../src/image/Remarquer.jpg";
 import Sport from "../src/image/Sport.jpg";
 import Tourisme from "../src/image/Tourisme.jpg";
-import PiedDePage from "./piedDePage";
-import SearchBar from "./Components/SearchBar";
-import AGORA from "../src/image/AGORA.png";
-import Header from "./Header";
+import PiedDePage from "./Components/piedDePage";
+
+import Header from "./Components/Header";
 import Nutrition from "../src/image/Nutrition.jpg";
 import Santé from "../src/image/Santé.jpg";
 import Technologie from "../src/image/Technologie.jpg";
@@ -100,7 +99,7 @@ function NouvelPublication(props) {
   }, [theme]);
 
   var postPublication = async () => {
-    const data = await fetch("/post-publication", {
+    const data = await fetch("/publications/post-publication", {
       method: "POST",
       headers: { "Content-Type": "application/x-www-form-urlencoded" },
       body: `titrePublication=${titre}&contenuPublication=${contenu}&datePublication=${date}&themePublication=${theme}&motClePublication=${motCle}&token=${props.token}&image=${image}`,
@@ -108,10 +107,9 @@ function NouvelPublication(props) {
 
     const body = await data.json();
     console.log("et dans body?", body);
-    // if (body.result == true) {
-    //   props.addPubliToken(body.publiToken);
+ 
     idP = body.id;
-    // return <Redirect to="/publication" />
+  
 
     if (body.result == true) {
       setRedir(true);
@@ -336,15 +334,9 @@ function NouvelPublication(props) {
 }
 
 function mapStateToProps(state) {
-  return { token: state.token, publiToken: state.publiToken };
+  return { token: state.token };
 }
 
-function mapDispatchToProps(dispatch) {
-  return {
-    addPubliToken: function (publiToken) {
-      dispatch({ type: "addPubliToken", publiToken: publiToken });
-    },
-  };
-}
 
-export default connect(mapStateToProps, mapDispatchToProps)(NouvelPublication);
+
+export default connect(mapStateToProps, null)(NouvelPublication);

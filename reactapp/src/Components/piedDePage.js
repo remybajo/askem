@@ -1,40 +1,15 @@
-import { Link, Redirect } from "react-router-dom";
+
 import React, { useState, useEffect, useRef } from "react";
-import Inscription from "./inscription";
-import { connect } from "react-redux";
+
 import {
-  Button,
   Layout,
-  Menu,
-  Image,
-  Card,
-  Avatar,
-  Divider,
   Row,
   Col,
-  Tabs,
-  Modal,
 } from "antd";
 import "antd/dist/antd.css";
-import {
-  SettingOutlined,
-  EditOutlined,
-  EllipsisOutlined,
-  DownloadOutlined,
-  TwitterOutlined,
-  FacebookOutlined,
-  LinkedinOutlined,
-  UserOutlined,
-  MessageOutlined,
-  LikeOutlined,
-  StarOutlined,
-  MailOutlined,
-  CalendarOutlined,
-  AppstoreOutlined,
-  LinkOutlined,
-} from "@ant-design/icons";
 
-const { Header, Content, Footer, Sider } = Layout;
+
+const {  Footer } = Layout;
 
 function piedDePage(props) {
   return (

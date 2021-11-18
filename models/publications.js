@@ -8,7 +8,6 @@ const publicationSchema = mongoose.Schema({
     date_publication: String,
     statut: Boolean,
     motsCle: String,
-    publiToken: String,
     user_id: { type: mongoose.Schema.Types.ObjectId, ref: 'users' },
 })
 

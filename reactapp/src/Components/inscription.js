@@ -1,10 +1,10 @@
-import React, { useState, useEffect } from 'react';
-import './App.css';
-import { Input, Button, Modal } from 'antd';
-import { Link, Redirect, withRouter } from 'react-router-dom'
+import React, { useState, useEffect, useRef } from 'react';
+import "../App.css"
+import { Input, Button,  } from 'antd';
+
 import { connect } from 'react-redux'
-//import { CookiesProvider } from "react-cookie";
-//import Cookies from 'js-cookie';
+import emailjs from "emailjs-com";
+
 
 function Inscription(props) {
     console.log("les props de la page inscription",props)
@@ -15,25 +15,37 @@ function Inscription(props) {
     const [signUpVerifPassword, setSignUpVerifPassword] = useState('')
     const [signInEmail, setSignInEmail] = useState('')
     const [signInPassword, setSignInPassword] = useState('')
-    
-
-
-
     const [userExists, setUserExists] = useState(false)
     const [listErrorsSignin, setErrorsSignin] = useState([])
     const [listErrorsSignup, setErrorsSignup] = useState([])
     const [isSuccess, setIsSuccess] = useState("");
     //Cookies.set('token', props.token)
 
+    //mail de validation 
+    var form = useRef();
+
+    const sendEmail = (e) => {
+      e.preventDefault();
+      emailjs
+        .sendForm(
+          "gmail",
+          "template_gjqpj1o",
+          form.current,
+          "user_Pk2WBbkI4D2OI2eKvtopA"
+        )
+  
+        .then(
+          (result) => {
+            console.log(result.text);
+          },
+          (error) => {
+            console.log(error.text);
+          }
+        );
+    };
+  
 
 
-    var findTheOne = async () => {
-        const user = await fetch("../../routes/users.js");
-        const body = await user.json();
-        console.log('ma const body dans inscription', body)
-    }
-
-    
 
     var handleSubmitSignup = async () => {
 
@@ -48,10 +60,8 @@ function Inscription(props) {
         console.log(body)
         if (body.result == true) {
             setUserExists(true);
-            props.addToken(body.token)
-            setIsSuccess("tu es connecté !")
-            
-          
+            setIsSuccess("Une dernière étape ! Il te faut valider ton mail")
+
         } else {
             setErrorsSignup(body.error)
         }
@@ -74,7 +84,7 @@ function Inscription(props) {
             setUserExists(true);
             setIsSuccess("tu es connecté !")
             props.addToken(body.token)
-            findTheOne()
+       
             
         } else {
             setErrorsSignin(body.error)
@@ -125,25 +135,57 @@ function Inscription(props) {
                     <Button onClick={() => handleSubmitSignin()} type="primary" style={{ backgroundColor:'white', color :"black" }}>Sign-in</Button>
 
                 </div>
-                <div className="Sign">
+                <form ref={form} onSubmit={sendEmail} className="Sign">
+        <h3
+          style={{ color: "white", display: "flex", justifyContent: "center" }}
+        >
+          {" "}
+          Je n'ai pas de compte{" "}
+        </h3>
 
-                    <h3 style={{ color: "white", display:'flex', justifyContent:'center' }}> Je n'ai pas de compte </h3>
+        <Input
+          onChange={(e) => setSignUpUsername(e.target.value)}
+          className="Login-input"
+          type="text"
+          placeholder="username"
+          name="name"
+        />
 
-                    <Input onChange={(e) => setSignUpUsername(e.target.value)} className="Login-input" placeholder="username" />
+        <Input
+          onChange={(e) => setSignUpEmail(e.target.value)}
+          className="Login-input"
+          type="email"
+          placeholder="email"
+          name="email"
+        />
 
-                    <Input onChange={(e) => setSignUpEmail(e.target.value)} className="Login-input" placeholder="email" />
+        <Input.Password
+          onChange={(e) => setSignUpPassword(e.target.value)}
+          className="Login-input"
+          type="password"
+          placeholder="password"
+          name="password"
+        />
 
-                    <Input.Password onChange={(e) => setSignUpPassword(e.target.value)} className="Login-input" placeholder="password" />
+        <Input.Password
+          onChange={(e) => setSignUpVerifPassword(e.target.value)}
+          className="Login-input"
+          type="password"
+          placeholder="verif password"
+        />
 
-                    <Input.Password onChange={(e) => setSignUpVerifPassword(e.target.value)} className="Login-input" placeholder="verif password" />
+        <div
+          style={{ display: "flex", justifyContent: "center", color: "red" }}
+        >
+          {tabErrorsSignup}
+        </div>
 
-                    <div style={{display:'flex',justifyContent:'center', color:"red"}}>
-                    {tabErrorsSignup}
-                    </div>
-
-                    <Button onClick={() => handleSubmitSignup()} style={{ backgroundColor:'white', color :"black" }} type="primary" >Sign-up</Button>
-
-                </div>
+        <input
+          type="submit"
+          value="Send"
+          onClick={() => handleSubmitSignup()}
+        />
+      </form>
                 
 
          </div>

@@ -1,22 +1,18 @@
 import React, { useState, useEffect} from "react";
 import { useParams } from 'react-router-dom';
 import {
-  Radio,  Layout,  Menu,  Button,  Row,  Col,  Tabs,  List,  Space,  Comment,  Form,
+  Radio,  Layout,   Button,  Row,  Col,  Tabs,  Space,  Comment,  Form,
   Input, Alert} from "antd";
 import { connect } from "react-redux";
 
 import Plot from 'react-plotly.js';
-import SearchBar from "./Components/SearchBar";
 import "./publication.css";
-import EnTete from "./EnTete";
-import SideBarDroite from "./SideBarDroite";
-import AGORA from "../src/image/AGORA.png"
-import Inscription from "./inscription";
-import Header from "./Header";
-import Commentaires from "./commentaires"
+import SideBarDroite from "./Components/SideBarDroite";
+import Header from "./Components/Header";
+import Commentaires from "./Components/commentaires"
 
 function Publication(props) {
-  const { Footer, Sider, Content } = Layout;
+  const { Footer,  Content } = Layout;
 
   var { id } = useParams();
   
@@ -81,7 +77,7 @@ function Publication(props) {
   var token = props.token;
   
   const [content, setContent] = useState({_id:"",thematique:"", titre:"" ,texte: "", image: "", date_publication: '', statut: "", motsCle: '',
-  publiToken: "", user_id: "", __v: ""});
+  user_id: "", __v: ""});
 
   const [user, setUser] = useState({ id:"", username: "",  email: "", password:"", token: "", __v: 0,
   gender: "", dateOfBirth: null, CSP: "", civilState: "", numberOfcChild: ""});
@@ -171,12 +167,7 @@ var publicationT=publicationTitre
     getSelectedPublication();
   }, [token])
   
-  // Récup des nouveaux commentaires via le reducer pour le re-render des top commentaires
-  // useEffect(() => {
-  //   console.log("comment from reducer: ", props.commentairesList)
-  //   setCommentairesList([...commentairesList, props.commentairesList[props.commentairesList.length-1]])
-  //   //commentairesList.push(props.commentairesList)
-  // }, [props.commentairesList])
+  
   
   console.log("comment after update of commentairesList: ", commentairesList)
 
@@ -565,7 +556,7 @@ var publicationT=publicationTitre
 }
 
 function mapStateToProps(state) {
-  return { token: state.token, publiToken: state.publiToken, commentairesList: state.commentairesList };
+  return { token: state.token,  commentairesList: state.commentairesList };
 }
 
 function mapDispatchToProps(dispatch) {

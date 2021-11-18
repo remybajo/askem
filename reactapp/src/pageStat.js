@@ -2,35 +2,21 @@ import {
     Button,
     Layout,
     Menu,
-    Breadcrumb,
+
     Image,
-    Card,
-    Avatar,
+
     Divider,
     Row,
-    Col,
     Tabs,
-    List,
-    Space,
-    Tag,
-    BackTop,
-    Badge,
-    Modal,
-    Carousel,
-    Statistic,
-    Skeleton,
-    message,
   } from "antd";
-  import { Link, Redirect } from "react-router-dom";
+
   import "antd/dist/antd.css";
   import { connect } from "react-redux";
-  import { ArrowUpOutlined, ArrowDownOutlined, UserOutlined, EditFilled } from "@ant-design/icons";
-  import InfiniteScroll from "react-infinite-scroll-component";
+
   
-  import EnTete from "./EnTete";
-  import SideBarDroite from "./SideBarDroite";
+  import SideBarDroite from "./Components/SideBarDroite";
   import React, { useState, useEffect } from "react";
-  import { set } from "mongoose";
+
   
   const { Header, Content, Footer, Sider } = Layout;
   const { SubMenu } = Menu;

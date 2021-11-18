@@ -17,7 +17,7 @@ router.post('/sign-up', async function (req, res, next) {
 
   var result = false
   var saveUser = null
-  var token = null
+ 
 
   const data = await userModel.findOne({
     email: req.body.emailFromFront
@@ -45,9 +45,7 @@ router.post('/sign-up', async function (req, res, next) {
       username: req.body.usernameFromFront,
       email: req.body.emailFromFront,
       password: hash,
-      token: uid2(32),
-     
-     
+  
     })
 
     saveUser = await newUser.save()
@@ -55,12 +53,12 @@ router.post('/sign-up', async function (req, res, next) {
 
     if (saveUser) {
       result = true
-      token = saveUser.token
+     
     }
   }
 
 
-  res.json({ result, saveUser, error, token })
+  res.json({ result, saveUser, error})
 })
 
 router.post('/sign-in', async function (req, res, next) {
@@ -105,62 +103,9 @@ router.post('/sign-in', async function (req, res, next) {
 
 })
 
-router.post('/post-publication', async function(req, res, next){
-  var error = []
-  var result = false
-  var publiToken = ''
-  var savePublication
-  var user = await userModel.findOne({token: req.body.token})
-  
-  var idd = user.id
 
 
-  console.log('onclick back', req.body)
 
-
-  if(req.body.titrePublication == ''
-  || req.body.contenuPublication == ''
-  ){
-    error.push('champs vides')
-  }
-
-  if(error.length == 0){
-    var newPublication = new publicationModel({
-      thematique: req.body.themePublication,
-      titre: req.body.titrePublication,
-      texte: req.body.contenuPublication,
-      image: req.body.image,
-      date_publication: req.body.datePublication,
-      statut: false,
-      motsCle: req.body.motClePublication,
-      publiToken: uid2(32),
-      user_id: idd,
-    })
-  
-    savePublication = await newPublication.save()
- 
-var id = ''    
-    
-    if(savePublication){
-      result = true
-      publiToken = savePublication.publiToken
-      id = savePublication.id
-    }
-  }
-
-  console.log('publiID', id)
-
-    res.json({result, publiToken, id})
-  })
-
-  // route qui permet de récupérer les infos user
-router.get('/infoUser', async function(req, res, next){
-  var userInfo = await userModel.findOne({token : req.query.token})
-console.log(userInfo)
-   res.json({userInfo})
- })
-
-module.exports = router;
 
 // mise à jour du profil
 router.post('/addProfil', async function(req, res, next){
@@ -181,20 +126,20 @@ var userUpdate = [
  })
 
 
-// pour publier une publication
-// router.post('/publication', async function(req, res, next){
-//     res.json({})
-//   })
 
-//récupérer les publications
+
+//récupérer les publications par thème
 router.get('/publicationdb', async function(req, res, next){
+  var result = false;
   var theme = req.query.theme
   var publicationTheme = await publicationModel.find({thematique : theme})
 
-console.log(publicationTheme)
+if (publicationTheme){
+  result = true;
+}
 
 
-  res.json({publicationTheme})
+  res.json({publicationTheme, result})
   
  })
 
@@ -202,16 +147,20 @@ console.log(publicationTheme)
 router.get("/commentarticle", async function(req, res, next){
 
   //Récupération des publications ou j'ai commenté
+  var result = false;
  var publication = [];
 var user = await userModel.findOne({token : req.query.token})
 if (user){
 var article = await commentModel.find
 ({user_id : user._id}).sort({date: -1}).populate('publication_id')
-console.log(article)
 for (let i=0; i < article.length; i++){
  publication.push(article[i].publication_id)}}
 
-    //Récupération des publications ou j'ai voté
+ if (article){
+   var result=true;
+ }
+
+ //Récupération des publications ou j'ai voté
 var publicationVote = [];
  if (user){
  var articleVote = await voteModel.find
@@ -222,73 +171,67 @@ var publicationVote = [];
   publicationVote.push(articleVote[i].publication_id)}}
  
 
-  // Récupération des publications que j'ai créé
+  if (articleVote){
+    var result=true;
+  }
+// Récupération des publications que j'ai créé
   if (user){
+   
     var myArticles = await publicationModel.find({user_id : user._id}).sort({date_publication: -1})
+  }
+
+  if (myArticles){
+    var result = true;
   }
     
 
-res.json({publication, publicationVote, myArticles})
+res.json({publication, publicationVote, myArticles, result})
  })
 
 
 
   
 
-
 // pour bar de recherche
  router.get('/searchPublication', async function(req, res, next){
+   var result = false;
    var allPublications = await publicationModel.find()
-   
-   res.json({allPublications})
+   if (allPublications){
+     var result = true
+   }
+   res.json({allPublications, result})
   })
 
-//pour ajouter un vote sur un publication [SI]
-router.post('/addvote', async function (req, res, next) {
-  var result = false
 
-  var user = await userModel.findOne({ token: req.body.token })
 
-  if (user) {
-
-    result = true
-    token = user.token
-  } else {
-    result = false
-  }
-  res.json({ user, token, result })
-})
-
-// pour ajouter un commentaire sur un publication [SI]
-// router.post('/addcommentaire', async function(req, res, next){
-//     res.json({})
-//   })
-
-// pour retirer un publication [SI]
-// router.delete('/enlevepublication', async function(req, res, next){
-//     res.json({})
-//   })
-
-// pour retirer un commentaire [SI]
-// router.delete('/enlevecom', async function(req, res, next){
-//     res.json({})
-//   })
-
-// pour récupérer les infos de la publication
+// pour récupérer les infos des publication
 router.get('/allVotes', async function(req, res, next){
+  var result = false;
     var allVotes = await voteModel.find()
+if (allVotes){
+  var result = false
+}
     res.json({allVotes})
    })
-//     res.json({})
-//   })
 
 
-router.get('/searchPublication', async function(req, res, next){
-  var allPublications = await publicationModel.find()
-  console.log(allPublications)
+//mail de validation
+ router.get('/validation', async function(req, res, next){
+   var resul = false;
+  var token = null
+  var userUpdate = [
+  await userModel.updateOne({email : req.query.email}, {token: uid2(32)})
+  ]
 
-  res.json({allPublications})
- })
+if (userUpdate){
+  var result = true;
+}
+
+
+ 
+   res.json({ userUpdate, token, result})
+  })
+ 
 
 
 

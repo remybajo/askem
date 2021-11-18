@@ -1,7 +1,6 @@
 var express = require('express');
 var router = express.Router();
 var userModel = require('../models/users')
-var voteModel = require('../models/votes')
 var commentModel = require('../models/comments')
 
 router.post('/sendComment', async function(req, res, next){

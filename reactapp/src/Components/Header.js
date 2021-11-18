@@ -1,8 +1,8 @@
 import React, { useState, useEffect, } from "react";
 import { Link } from "react-router-dom";
 import Button from "react-bootstrap/Button";
-import AGORA from "../src/image/AGORA.png"
-import SearchBar from "./Components/SearchBar";
+import AGORA from "../image/AGORA.png"
+import SearchBar from "./SearchBar";
 import Inscription from "./inscription";
 import { connect } from "react-redux";
 import {Image, Modal } from "antd";
@@ -11,8 +11,6 @@ import {Image, Modal } from "antd";
 function Header(props) {
 
     const [isModalVisible, setIsModalVisible] = useState(false);
-    const [isConnect, setIsConnect] = useState(false);
-    const [isConnectProfil, setIsConnectProfil] = useState(false);
     const [publicationTitre, setPublicationTitre] = useState();
     var token = props.token;
 
