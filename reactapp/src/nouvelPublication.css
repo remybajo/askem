@@ -1,0 +1,64 @@
+.imageVide {
+    border: 1px solid black;
+    width: 75em;
+    height: 33em;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 3em;
+    margin-bottom: 3em;
+}
+
+.cascade {
+    margin-left: 5em;
+    width: 20em;
+}
+
+.motclé {
+    width: 20em;
+    margin-right: 5em;
+}
+
+.maflex {
+    display: flex;
+    justify-content: space-around;
+}
+
+.description {
+    border: 1px solid black;
+    margin-top: 5em;
+    margin-left: 20%;
+    margin-right: 20%;
+    width: 60%;
+}
+
+.monbouton {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    height: 15em;
+}
+
+.bouton {
+    margin-right: 5em;
+    color: white;
+    border-color: #214c74;
+    background-color: #214c74;
+    border-radius: 7px;
+    height: 4em;
+    width: 12em
+}
+
+.montimer {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+}
+
+.timer {
+    margin-right: 5em;
+    color: black;
+    border-color: #214c74;
+    border-radius: 7px;
+    height: 4em;
+    width: 12em
+}

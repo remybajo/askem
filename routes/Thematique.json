@@ -1,0 +1,56 @@
+{
+    "emploi":
+        {
+        "sp1": "opportunité",
+        "sp2": "proposition",
+        "sp3": "dernière nouvelles"
+    },
+    "Education":
+        {
+        "sp1": "école",
+        "sp2": "Pédagogie",
+        "sp3": "extra-scolaire",
+        "sp4": "préoccupation"
+    },
+    "Politique":
+        {
+        "sp1": "prêt de chez vous",
+        "sp2": "actualité",
+        "sp3": "information",
+        "sp4": "proposition"
+    },
+    "Evenement":
+        {
+        "sp1": "fêtes",
+        "sp2": "culture",
+        "sp3": "rassemblement"
+    },
+    "Environnement":
+        {
+        "sp1": "nature",
+        "sp2": "recyclage",
+        "sp3": "entraide",
+        "sp4": "consommation local"
+    },
+    "Sport":
+        {
+        "sp1": "balle",
+        "sp2": "ballon",
+        "sp3": "bagarre",
+        "sp4": "glissade"
+    },
+    "Tourisme":
+        {
+        "sp1": "en france",
+        "sp2": "par là-bas",
+        "sp3": "non, pas par là!",
+        "sp4": "insolite"
+    },
+    "T'as remarqué?":
+        {
+        "sp1": "ou pas?",
+        "sp2": "hack du quotidien",
+        "sp3": "fourre-tout",
+        "sp4": "annonce"
+    }
+}
