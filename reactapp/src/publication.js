@@ -23,12 +23,10 @@ function Publication(props) {
   const [messageCom, setMessageCom] = useState("");
   const [boutonVali, setBoutonVali] = useState("Valider le choix");
   const [comment, setComment] = useState("");
-  const [commentaire, setCommentaire] = useState("");
+
   const [boutonValiCom, setBoutonValiCom] = useState("Envoyer le commentaire");
   const [commentairesList, setCommentairesList] = useState([]);
-  const [currentPubli, setCurrentPubli] = useState();
-  const [publiExist, setPubliExist] = useState(false);
-  const [list, setList] = useState();
+
   const [stats, setStats] = useState();
   const [alreadyVoted, setAlreadyVoted] = useState(false);
   const [alreadyCommented, setAlreadyCommented] = useState(false);
@@ -36,17 +34,10 @@ function Publication(props) {
   const [nbVoters, setNbVoters] = useState(0);
   const [userComment, setUserComment] = useState("");
   const [connected, setConnected] = useState(false);
-  const [count, setCount] = useState(0);
-  const [counter, setCounter] = useState(0)
-  const [likeComment, setLikeComment] = useState(false)
+
   const [gender, setGender] = useState();
   const [publicationTitre, setPublicationTitre] = useState();
-  const [likes, setLikes] = useState(0);
-  const [dislikes, setDislikes] = useState(0);
-  const [action, setAction] = useState(null);
-  const [actionLike, setActionLike] = useState("");
-  const [actionDislike, setActionDislike] = useState("");
-  const [isConnect, setIsConnect] = useState(false);
+
   const [isConnectProfil, setIsConnectProfil] = useState(true);
   const [isModalVisible, setIsModalVisible] = useState(false);
 

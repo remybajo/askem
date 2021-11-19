@@ -4,7 +4,7 @@ import { useParams } from "react-router";
 import { Link} from "react-router-dom";
 
 function Validation () {
-    const [validation, setValidation] = useState(false)
+  
     var {email} = useParams()
 console.log({email});
 
@@ -12,18 +12,9 @@ console.log({email});
         
             var RecupEmail = async (props) => {
               var rawResponse = await fetch(`/validation?email=${email}`);
-              const response = await rawResponse.json();
-              if (response.result==true) {
-        setValidation(true)
-        props.addToken(response.token)}
-            };
-            RecupEmail();
-
-   
+              const response = await rawResponse.json();}
+              
        
-         
-          
-      
 
 
     return (
