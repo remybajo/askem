@@ -136,15 +136,7 @@ function Publication(props) {
   }
 
   //recupération données bar de recherche
-  useEffect(() => {
-    const findPublications = async () => {
-        const toutePublication = await fetch("/searchPublication");
-        const res_publication = await toutePublication.json();
-        console.log("ma res_publication", res_publication.allPublications)
-        setPublicationTitre(res_publication.allPublications)
-    }; findPublications()
-}, []);
-var publicationT=publicationTitre
+
 
   //récupérer le contenu de la publication sélectionnée, des commentaires associés et des stats associées
   useEffect(async() => {
