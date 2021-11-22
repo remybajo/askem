@@ -1,7 +1,6 @@
 import {
   Button,
   Layout,
-  Menu,
   Card,
   Divider,
   Row,
@@ -36,33 +35,13 @@ function PageProfil(props) {
   const [latest, setLatest] = useState([]);
   const [voteArticle, setVoteArticle] = useState([]);
   const [myPubli, setMyPubli] = useState([]);
-  const [isModalVisible, setIsModalVisible] = useState(false);
+
   
    
 
-  const [modal, setModal] = useState(false);
 
-  var showModal = () => {
-    setIsModalVisible(true);
-  };
 
-  const handleOk = (e) => {
-    setIsModalVisible(false);
-  };
 
-  const handleCancel = (e) => {
-    setIsModalVisible(false);
-  };
-
-  var handleClick = async () => {
-    if (props.token == null) {
-      showModal();
-    } else {
-      setIsModalVisible(!isModalVisible);
-    }
-  };
-
-  var connexion = "connexion/inscription";
 
 
   useEffect(() => {

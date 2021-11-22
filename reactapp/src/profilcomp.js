@@ -7,20 +7,15 @@ import { Redirect } from "react-router-dom";
 import {
   Layout,
   Button,
-  Image,
   Cascader,
-  Select,
   Form,
-  Divider,
   Row,
   Col,
   InputNumber,
   BackTop,
 } from "antd";
 import "antd/dist/antd.css";
-
-
-
+import Header from "./Components/Header";
 import SideBarDroite from "./Components/SideBarDroite";
 
 
@@ -69,7 +64,7 @@ function Profilcomp(props) {
         var rawResponse = await fetch(`/infoUser?token=${props.token}`);
         const response = await rawResponse.json();
         setUserMail(response.userInfo.email)
-        console.log(response)}
+        }
 
         ProfilComplete();
   
@@ -151,64 +146,7 @@ function Profilcomp(props) {
 
     return (
         <Layout className="site-layout-background">
-        <div id="head">
-          <div style={{height:"100px"}}>
-            <Image
-              preview={false}
-              size={30}
-              className="logo"
-              width={150}
-              src="./image/AGORA.png"
-            />
-          </div>
-          <div>
-            {" "}
-            <p style={{ marginLeft: "50px" }}>
-              {" "}
-              Donnez votre avis d'une manière différente{" "}
-            </p>
-            <Button
-              type="primary"
-              size={100}
-              style={{
-                backgroundColor: "rgba(240, 52, 52, 1)",
-                borderColor: "rgba(240, 52, 52, 1)",
-                marginLeft: "50px",
-                boxShadow: "1px 15px 10px grey",
-              }}
-            >
-              Poster votre publication
-            </Button>
-          </div>
-  
-          <div style={{ marginTop: "40px", marginLeft: "40px" }}>
-            {" "}
-            <Button
-              type="text"
-              style={{
-                backgroundColor: "transparent",
-                color: "#214C74",
-  
-                borderColor: "transparent",
-              }}
-            >
-              LOG IN
-            </Button>
-            <Divider type="vertical" />
-            <Button
-              type="link"
-              style={{
-                backgroundColor: "#214C74",
-  
-                borderColor: "#214C74",
-              }}
-            >
-              LOG OUT
-            </Button>
-          </div>
-
-        
-          </div>
+       <Header/>
 
 
         <Layout className="site-layout-background">

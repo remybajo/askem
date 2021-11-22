@@ -8,8 +8,7 @@ router.post('/sendVote', async function(req, res, next){
     var result = false
     var user = await userModel.findOne({token: req.body.token})
 
-    console.log("check publication id: ", req.body.publication)
-    console.log("check user id: ", user._id)
+
   
     if(user != null){
       var newVote = new voteModel({

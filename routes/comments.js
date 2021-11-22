@@ -19,14 +19,14 @@ router.post('/sendComment', async function(req, res, next){
     })
   
       var commentSave = await newComment.save()
-      console.log("check commentSave: ",commentSave)
+      //console.log("check commentSave: ",commentSave)
   
       if(commentSave.vote){
         result = true
       }
     // }
   
-    res.json(result)
+    res.json(result, commentSave)
   })
 
   var id;
@@ -46,8 +46,7 @@ router.post('/sendComment', async function(req, res, next){
 
 router.post('/updateLikes', async function(req, res, next){
   var commentLiked = await commentModel.findById(req.body.commentId);
-  console.log("check like: ", req.body.like);
-  console.log("check dislike: ", req.body.dislike);
+  
 
   var checkDoublonLikes = commentLiked.users_like.findIndex(e => e == req.body.userId)
   var checkDoublonDislikes = commentLiked.users_dislike.findIndex(e => e == req.body.userId)
@@ -68,7 +67,6 @@ router.post('/updateLikes', async function(req, res, next){
     await commentLiked.save();
   }
   
-  console.log("comment liked after push: ", commentLiked)
 
   res.json(commentLiked)
 })

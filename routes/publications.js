@@ -14,8 +14,7 @@ router.get('/lastPublications', async function(req, res, next){
     var result = false;
     var publications = await publicationModel.find().sort({date_publication: -1});
     var latest = publications.slice(0,3)
-    //console.log("latest: ",latest.length)
-  
+   
     if(latest.length == 3){
         result = true
       }
@@ -77,18 +76,17 @@ router.get('/selectedPublication', async function(req, res, next){
   // récupération de l'article correspondant à l'id sélectionné
   var publication = await publicationModel.findById(id);
   var publiToDisplay = publication
-
   if(publiToDisplay){
     result = true
   };
 
   // récupération des commentaires sur la publication sélectionnée
-  var comments = await commentModel.find({publication_id: id}).sort({nb_likes: -1});
-  console.log("comments of publication: ", comments)
+var comments = await commentModel.find({publication_id: id})
+
   if(comments){
-    result_comments = true;
+  result_comments = true;
     //console.log("result_comments: ", result_comments)
-  };
+};
   //console.log("publication selected: ",publiToDisplay)
 
    
@@ -98,19 +96,19 @@ router.get('/selectedPublication', async function(req, res, next){
   var votes
   var userConnected = false;
  
-
+// verifie si l'utilisateur est connecté
   if (req.query.token != null) {
     userConnected = true;
     user = await userModel.findOne({token: req.query.token});
-    console.log("user ", user);
   }
   
   // récup data votes
   votes = await voteModel.find({publication_id: id});
   
+  //on récupère les données sur les gens qui ont voté. Et on récupère si la personne connecté fait aprtie des votants
   var voters = await voteModel.find({publication_id: id}).populate('user_id');
-  console.log("voters: ", voters.length)
-
+  
+//stats
   var gender = [{genre: "hommes", nbre:0}, {genre: "femmes", nbre:0}]
   for(var i=0;i<voters.length;i++){
     if(voters[i].user_id.gender == 'homme'){
@@ -120,14 +118,13 @@ router.get('/selectedPublication', async function(req, res, next){
     }
   }
 
+  //Stats
   var nbVoters = voters.length
   
  
-  console.log("genre: ", gender);
-      
-  console.log("user connected: ", userConnected)
+ 
 
-  // récupération du résultat du vote pour l'article sélectionné
+  // récupération du résultat du vote pour l'article sélectionné. On aggrege le nombre de vote par vote.
 
   var stats = await voteModel.aggregate([ 
     {$match:{publication_id: mongoose.Types.ObjectId(id)}},
@@ -137,7 +134,7 @@ router.get('/selectedPublication', async function(req, res, next){
    }}
   ]);
   
-  //console.log('stats ', stats)
+
 
   res.json({result, publiToDisplay, comments, stats, userConnected, user, votes, gender, nbVoters})
 
@@ -150,8 +147,8 @@ router.delete('/deleteComment', async function(req, res, next){
 
   // suppression du (ou des) commentaires. Il n'y aura qu'un seul commentaire par la suite.
  
-  await commentModel.deleteMany({publication_id: id, user_id:user._id });
-  console.log("après suppr ",commentModel.find({publication_id: id, user_id:user._id }));
+  await commentModel.deleteOne({publication_id: id, user_id:user._id });
+  
   
   res.json();
 })
@@ -169,7 +166,6 @@ router.post('/post-publication', async function(req, res, next){
   var idd = user.id
 
 
-  console.log('onclick back', req.body)
 
 
   if(req.body.titrePublication == ''
@@ -200,7 +196,6 @@ var id = ''
     }
   }
 
-  console.log('publiID', id)
 
     res.json({result, id})
   })

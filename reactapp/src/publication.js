@@ -36,19 +36,16 @@ function Publication(props) {
   const [connected, setConnected] = useState(false);
 
   const [gender, setGender] = useState();
-  const [publicationTitre, setPublicationTitre] = useState();
-
-  const [isConnectProfil, setIsConnectProfil] = useState(true);
-  const [isModalVisible, setIsModalVisible] = useState(false);
+  
 
 
 
   const [listVotes, setListVotes] = useState([{vote: "J'Adore", color: "#33EE22", border:""}, {vote: "Je suis Pour", color: "#93c47d", border:""}, {vote: "Je suis Mitigé(e)", color: "#ffd966", border:""}, {vote: "Je suis Contre", color: "#ffa500", border:""}, {vote: "Je Déteste", color: "#f44336", border:""}])
 
-  //const [border, setBorder] = useState("");
 
-  var newComment = {};
-  var topComments = []
+// Sert si on utilise le reducer
+ // var newComment = {};
+ // var topComments = []
 
   const [idC, setIdC] = useState(0)
 
@@ -80,14 +77,16 @@ function Publication(props) {
     return format;
   };
 
-  const getSelectedPublication = async() => {
+  // grosse requete qui va récupérer tout ce dont on a besoin pour la page publication (la publication sur laquelle on a cliqué, les commentaires et les votes les données de l'utilisateur pour savoir si il 
+  //a un token, si il a un token on récupère son vote et son commentaire)
+  const getSelectedPublication = async () => {
     const publication = await fetch(`/publications/selectedPublication?id=${id}&token=${token}`)
     var body = await publication.json();
 
     //récupérer la publication
     setContent(body.publiToDisplay);
 
-    // si l'utilisateur n'est pas loggé, cacher des éléments
+    // si l'utilisateur n'est pas loggé, cacher des éléments. On met a jour connected pour afficher ce qui doit etre affiché ou pas.
     if(token)  {
       setConnected(true);
     } else {
@@ -106,15 +105,22 @@ function Publication(props) {
       }
     }
 
-    //vérifier si l'utilisateur a déjà voté et récupérer son vote le cas échéant
+    //vérifier si l'utilisateur a déjà voté et récupérer son vote le cas échéant. On vérifie dans la liste des votes si y'a un user id qui est égal au user id qui est connecté.
+    // si oui on récuèpre les infos
     if (token) {
       var voted = body.votes.filter(vote => vote.user_id == body.user._id);
       if (voted.length > 0) {
         setAlreadyVoted(true);
+        //sert a griser les boutons.
         setStatus(true)
+        //rend un tableau avec un seul vote.
         setUserVote(voted[0].vote)
         setNbVoters(body.nbVoters)
       } 
+ 
+
+    //vérifier si l'utilisateur a déjà commenté et récupérer son vote le cas échéant. On vérifie dans la liste des commentaires (qu'on a envoyé en back end) si y'a un user id qui est égal au user id qui est connecté.
+    // si oui on récuèpre les infos
 
       var commented = body.comments.filter(comment => comment.user_id == body.user._id);
       if (commented.length > 0) {
@@ -125,34 +131,35 @@ function Publication(props) {
       }
   
     } else {
+      //même logique. On cache si il est pas logué. Pour le logout
       setAlreadyVoted(false);
       setStatus(false);
       setAlreadyCommented(false)
     }
     setGender(body.gender);
-    console.log("body gender ", body.gender)
-
+    //message d'erreur
     setMessage("");
   }
 
-  //recupération données bar de recherche
 
 
-  //récupérer le contenu de la publication sélectionnée, des commentaires associés et des stats associées
+
+  //récupérer le contenu de la publication sélectionnée, des commentaires associés et des stats associées.
+  //on lance tout à l'initialisation.
   useEffect(async() => {
     // Afficher tout
     getSelectedPublication(); 
   },[])
 
-  console.log("check nb Voters: ", nbVoters)
 
+//récupérer le contenu de la publication sélectionnée, des commentaires associés et des stats associées.
+//on relance la requête si il se connecte depuis la page.
   useEffect(() => {
     getSelectedPublication();
   }, [token])
   
   
   
-  console.log("comment after update of commentairesList: ", commentairesList)
 
   // mise à jour de la sélection pour le vote
   useEffect(() => {
@@ -164,16 +171,20 @@ function Publication(props) {
       setMessage("");
     }
   }, [selection]); 
-  
+
+  //gérer la bordure. Et faut que quand tu recliques
+  //comme c'est un setteur, pour modifier un élément d'un useState qui est un tableau on doit faire une copie. 
+  // on prend le selectionné et on recolle dans le tableau.
   var handleBorder = (element) => {
     var items = [];
     var index = element.element;
-    console.log("check index: ", index)
+    
     for (var i=0; i<listVotes.length; i++) {
       if (i == index){
         items = [...listVotes];
         items[i].border = "solid blue";
         setListVotes(items)
+        //pour que ceux sélectionné ne passe plus en bleu
       } else {
         items = [...listVotes];
         items[i].border = "";
@@ -194,21 +205,24 @@ function Publication(props) {
   // validation du vote au click sur bouton valider
 
   var voteValidation = () => {
-    console.log("check selection: ", selection)
-    console.log("check vote: ", vote)
+
     if (!vote) {
       setMessage(<Alert message="Veuillez choisir une option de vote avant de valider." type="error" showIcon />);
     } else if (!token) {
       setMessage(<Alert message="Veuillez vous identifier avant de voter." type="error" showIcon />);
+      // pour griser : si y'a un vote qui est documenté et qu'ils ne sont pas griser.
+      //setStatus rend le disable true or false
     } else if (vote && !status) {
       setStatus(true);
       setMessage(<Alert message="Votre vote a bien été pris en compte. Merci pour votre participation." type="success" showIcon />);
+
       setAlreadyVoted(true);
       date = dateFormat(Date.now());
       sendVote();
+      // on relance getselected publication
       getSelectedPublication(); 
     }
-    console.log("vote: ",vote);
+    
   };
 
 
@@ -232,11 +246,8 @@ function Publication(props) {
       setMessageCom(<Alert message="Veuillez voter avant d'envoyer un commentaire" type="error" showIcon />);
     } else {
       dateComment = dateFormat(Date.now());
-      console.log("date commentaire: ", dateComment);
+      
       sendComment();
-      // newComment = {commentaire: comment, vote: userVote, nb_likes: 0, nb_dislikes:0};
-      // console.log("new comment object: ", newComment)
-      // props.addComment(newComment);
       setComment("");
       setMessageCom(<Alert message="Votre commentaire a bien été envoyé." type="success" showIcon />);
       getSelectedPublication();
@@ -252,7 +263,6 @@ function Publication(props) {
     setMessageCom("Le commentaire a bien été supprimé.")
     getSelectedPublication(); 
   
-    //setAlreadyCommented(false)
   }
 
   var labels = [];
@@ -276,30 +286,7 @@ function Publication(props) {
       setStatus(true)
     } 
   }
-//show Modal
-  var showModal = () => {
-    setIsModalVisible(true);
-  };
 
-  const handleOk = (e) => {
-    setIsModalVisible(false);
-  };
-
-  const handleCancel = (e) => {
-    setIsModalVisible(false);
-  };
-
-  var handleClick = async () => {
-    if (props.token == null) {
-        setIsConnectProfil(false)}
-
-        if (isConnectProfil == false){
-      showModal();}
-  };
-
-  var deleteClick = (e) => {
-    setIsConnectProfil(false)
-  }
 
 
   var data = [
@@ -333,7 +320,6 @@ function Publication(props) {
     
       <Header/>
         
-     
       <Layout style={{height:"100vh"}}>
         
         <SideBarDroite/>

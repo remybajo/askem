@@ -2,34 +2,25 @@ import React, { useState, useEffect } from "react";
 import "./nouvelPublication.css";
 import {
   Layout,
-  Menu,
   Button,
-  Image,
-  Empty,
   Cascader,
   Input,
   Space,
   Row,
   Col,
-  Form,
   Divider,
 } from "antd";
-import { Link, Redirect } from "react-router-dom";
+import {  Redirect } from "react-router-dom";
 import { connect } from "react-redux";
 
 // reactstrap pour le moment utilisé pour le modal avec les images en provenance de l'APIK
 import "bootstrap/dist/css/bootstrap.min.css";
 import {
-  Modal,
-  ModalHeader,
-  ModalBody,
-  ModalFooter,
   Card,
   CardImg,
   CardText,
   CardBody,
   CardTitle,
-  CardSubtitle,
 } from "reactstrap";
 
 
@@ -66,17 +57,9 @@ function NouvelPublication(props) {
   const [redir, setRedir] = useState(false);
 
   // hook d'état pour gestion de l'image
-  const apiKey = "23345038-9d4a0f31be7a8f5a5e2bfc293";
-  const [mot_Cle, setMot_Cle] = useState("");
-  const [foundPictures, setFoundPictures] = useState([]);
-  const [modal, setModal] = useState(false);
-  const [pictureSelected, setPictureSelected] = useState("");
-  const [validatePicture, setValidatePicture] = useState(false);
   const [id, setId] = useState();
   const [image, setImage] = useState();
- 
   var illustration;
-  var border = { border: "" };
   var idP = "";
 
 
@@ -106,48 +89,20 @@ function NouvelPublication(props) {
     });
 
     const body = await data.json();
-    console.log("et dans body?", body);
- 
     idP = body.id;
-  
-
     if (body.result == true) {
       setRedir(true);
     }
     setId(idP);
 
-    //sauvegarde image
-    const sendImage = async () => {
-      var image = new FormData();
-      image.append("image", {
-        uri: pictureSelected,
-        type: "image/jpeg",
-        name: "image.jpg",
-      });
-
-      let rawResponse = await fetch("/publications/upload", {
-        method: "post",
-        body: image,
-      });
-    };
+   
   };
 
   if (id) {
-    console.log("id", id);
+
     return <Redirect to={`/publication/${id}`} />;
   }
 
-  /* return <Redirect to={`/publication/${id}`} />} */
-
-  // var cherchePubli = async () => {
-  //   setRedir(true)
-  // if (redir == true) {
-  //   console.log("ICI APPARAISSENT LES SAINTS PROPS!!!", id);
-  // const actual = await fetch (`/selectedPublication?id=${id}`)
-  // const Ractual = await actual.json()
-  //     setId(idP)
-  //   console.log("idd", idP)
-  // return <Redirect to={`/publication/${id}`} />;
 
   const options = [
     {
@@ -202,7 +157,6 @@ function NouvelPublication(props) {
   ];
 
   function onChange(value) {
-    console.log("ma value", value);
     var thematique = value;
     setTheme(thematique);
   }
@@ -210,7 +164,6 @@ function NouvelPublication(props) {
   const onSearch = (value) => {
     var listeMotCle = motCle;
     listeMotCle.push(value);
-    console.log("ma value", value);
     setMotCle(listeMotCle);
   };
 
@@ -229,7 +182,6 @@ function NouvelPublication(props) {
   );
   // }
 
-  console.log("dans image", image);
 
   var imageP = () => {
     if (theme == "Politique") {
@@ -263,10 +215,6 @@ function NouvelPublication(props) {
   return (
     <div className="site-layout-background">
      <Header/>
-
-      
-      
-    
 
       <Row>
         <SideBarDroite />

@@ -137,8 +137,6 @@ router.get('/publicationdb', async function(req, res, next){
 if (publicationTheme){
   result = true;
 }
-
-
   res.json({publicationTheme, result})
   
  })
@@ -155,7 +153,6 @@ var article = await commentModel.find
 ({user_id : user._id}).sort({date: -1}).populate('publication_id')
 for (let i=0; i < article.length; i++){
  publication.push(article[i].publication_id)}}
-
  if (article){
    var result=true;
  }

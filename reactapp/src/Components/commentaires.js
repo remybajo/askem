@@ -3,22 +3,17 @@ import { Avatar, Comment, Tooltip} from "antd";
 
 import { LikeOutlined, LikeFilled, DislikeOutlined, DislikeFilled} from "@ant-design/icons";
 
-
+//composant enfant de publication
 
 function Commentaires(props) {
 
     const [actionLike, setActionLike] = useState(props.thumbUp);
     const [actionDislike, setActionDislike] = useState("");
-    const [likeComment, setLikeComment] = useState(false)
-    const [dislikeComment, setDislikeComment] = useState(false)
-
-    const [idC, setIdC] = useState(0)
     const [countLike, setCountLike] = useState(0)
     const [totalLike, setTotalLike] = useState(props.nb_likes)
     const [countDislike, setCountDislike] = useState(0)
     const [totalDislike, setTotalDislike] = useState(props.nb_dislikes)
-
-    const [idComment, setIdComment] = useState("");
+    const [idComment, setIdComment] = useState(props.id);
 
     useEffect(() => {
       if (props.alreadyLiked) {
