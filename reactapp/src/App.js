@@ -22,6 +22,7 @@ import piedDePage from "./Components/piedDePage";
 const store = createStore(combineReducers({ token, commentairesList}));
 
 function App(props) {
+  
   return (
     <Provider store={store}>
       <Router>

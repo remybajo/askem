@@ -8,14 +8,12 @@ import {
   Tabs,
   List,
   Statistic,
-
 } from "antd";
 import { Link } from "react-router-dom";
 import "antd/dist/antd.css";
 import { connect } from "react-redux";
-import {  UserOutlined, EditFilled } from "@ant-design/icons";
+import { UserOutlined, EditFilled } from "@ant-design/icons";
 import InfiniteScroll from "react-infinite-scroll-component";
-
 
 import SideBarDroite from "./Components/SideBarDroite";
 import PiedDePage from "./Components/piedDePage";
@@ -23,11 +21,9 @@ import PiedDePage from "./Components/piedDePage";
 import React, { useState, useEffect } from "react";
 import Header from "./Components/Header";
 
-
-const {  Content} = Layout;
+const { Content } = Layout;
 
 const { TabPane } = Tabs;
-
 
 function PageProfil(props) {
   const [loading, setLoading] = useState(false);
@@ -35,14 +31,6 @@ function PageProfil(props) {
   const [latest, setLatest] = useState([]);
   const [voteArticle, setVoteArticle] = useState([]);
   const [myPubli, setMyPubli] = useState([]);
-
-  
-   
-
-
-
-
-
 
   useEffect(() => {
     const ProfilComment = async () => {
@@ -61,8 +49,6 @@ function PageProfil(props) {
     ProfilComment();
     // cherche()
   }, []);
-
-
 
   const loadMoreData = () => {
     if (loading) {
@@ -89,8 +75,7 @@ function PageProfil(props) {
 
   return (
     <Layout className="site-layout-background">
-      
-      <Header/>
+      <Header />
 
       <Layout className="site-layout-background">
         <SideBarDroite />
@@ -271,27 +256,33 @@ function PageProfil(props) {
             className="site-statistic-demo-card"
             style={{ marginBottom: "30px" }}
           >
-             <h4 style={{
-              display:"flex",
+            <h4
+              style={{
+                display: "flex",
                 color: "blue",
                 textAlign: "center",
-               justifyContent:"center",
+                justifyContent: "center",
                 marginBottom: "30px",
-               
-              }}><Button> <Link to="/pageStat"> Plus de stats </Link> </Button> </h4>
+              }}
+            >
+              <Button>
+                {" "}
+                <Link to="/pageStat"> Plus de stats </Link>{" "}
+              </Button>{" "}
+            </h4>
             <h3
               style={{
                 color: "white",
                 textAlign: "center",
-                alignItems : "center",
+                alignItems: "center",
                 marginBottom: "30px",
                 marginLeft: "400px",
               }}
             >
               {" "}
-              Mes stats 
+              Mes stats
             </h3>
-           
+
             <Row gutter={16}>
               <Col span={12}>
                 <Card>
@@ -300,7 +291,6 @@ function PageProfil(props) {
                     value={myPubli.length}
                     valueStyle={{ color: "#3f8600" }}
                     suffix={<EditFilled />}
-                    
                   />
                 </Card>
               </Col>

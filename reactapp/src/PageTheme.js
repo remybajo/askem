@@ -1,33 +1,19 @@
 import React, { useState, useEffect } from "react";
-import { Link,  useParams } from "react-router-dom";
-import {
-  Layout,
-  Menu,
-  Card,
-  Col,
-  Tabs,
-  Space,
-  List,
-  Statistic,
-
-} from "antd";
+import { Link, useParams } from "react-router-dom";
+import { Layout, Menu, Card, Col, Tabs, Space, List, Statistic } from "antd";
 import "antd/dist/antd.css";
 import {
-  
   MessageOutlined,
   LikeOutlined,
   StarOutlined,
-
   ArrowRightOutlined,
-
 } from "@ant-design/icons";
 import SideBarDroite from "./Components/SideBarDroite";
 import "antd/dist/antd.css";
 import PiedDePage from "./Components/piedDePage";
 import Header from "./Components/Header";
 
-const { Content} = Layout;
-
+const { Content } = Layout;
 
 const listData = [];
 for (let i = 0; i < 23; i++) {
@@ -52,7 +38,6 @@ function PageTheme(props) {
   var { theme } = useParams();
   const [latest, setLatest] = useState([]);
   const [themeArticle, setThemeArticle] = useState(theme);
-  
 
   //   useEffect(() => {
   //      Thematique();
@@ -72,13 +57,11 @@ function PageTheme(props) {
   //test
 
   console.log("pagetheme mon latest", latest);
- 
 
   return (
     <Layout className="site-layout-background">
       {" "}
-     <Header/>
-      
+      <Header />
       <Layout className="site-layout-background">
         <SideBarDroite />
         <Content
@@ -138,7 +121,9 @@ function PageTheme(props) {
                     key="list-vertical-message"
                   />,
                 ]}
-                extra={<img width={272} alt="image de theme" src={item.image} />}
+                extra={
+                  <img width={272} alt="image de theme" src={item.image} />
+                }
               >
                 <List.Item.Meta
                   title={

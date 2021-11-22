@@ -10,19 +10,12 @@ import {
   Col,
   Divider,
 } from "antd";
-import {  Redirect } from "react-router-dom";
+import { Redirect } from "react-router-dom";
 import { connect } from "react-redux";
 
 // reactstrap pour le moment utilisé pour le modal avec les images en provenance de l'APIK
 import "bootstrap/dist/css/bootstrap.min.css";
-import {
-  Card,
-  CardImg,
-  CardText,
-  CardBody,
-  CardTitle,
-} from "reactstrap";
-
+import { Card, CardImg, CardText, CardBody, CardTitle } from "reactstrap";
 
 import SideBarDroite from "./Components/SideBarDroite";
 
@@ -42,7 +35,6 @@ import Santé from "../src/image/Santé.jpg";
 import Technologie from "../src/image/Technologie.jpg";
 import Transport from "../src/image/Transport.jpg";
 
-
 const { Footer, Sider, Content } = Layout;
 const { Search } = Input;
 
@@ -61,8 +53,6 @@ function NouvelPublication(props) {
   const [image, setImage] = useState();
   var illustration;
   var idP = "";
-
-
 
   useEffect(() => {
     var dateKnow = async () => {
@@ -94,15 +84,11 @@ function NouvelPublication(props) {
       setRedir(true);
     }
     setId(idP);
-
-   
   };
 
   if (id) {
-
     return <Redirect to={`/publication/${id}`} />;
   }
-
 
   const options = [
     {
@@ -153,7 +139,6 @@ function NouvelPublication(props) {
       value: "Transport",
       label: "Transport",
     },
-    
   ];
 
   function onChange(value) {
@@ -167,13 +152,15 @@ function NouvelPublication(props) {
     setMotCle(listeMotCle);
   };
 
-  
-
-
   // if (pictureSelected && validatePicture) {
   var illustration = (
     <Card style={{ width: "640px", height: "360px" }}>
-      <CardImg width="100%" height="100%" src={image} alt="Pour voir apparaître la photo, choisissez un thème" />
+      <CardImg
+        width="100%"
+        height="100%"
+        src={image}
+        alt="Pour voir apparaître la photo, choisissez un thème"
+      />
       <CardBody>
         <CardTitle tag="h5"></CardTitle>
         <CardText></CardText>
@@ -181,7 +168,6 @@ function NouvelPublication(props) {
     </Card>
   );
   // }
-
 
   var imageP = () => {
     if (theme == "Politique") {
@@ -208,13 +194,12 @@ function NouvelPublication(props) {
       setImage(Technologie);
     } else if (theme == "Transport") {
       setImage(Transport);
-  };}
-
- 
+    }
+  };
 
   return (
     <div className="site-layout-background">
-     <Header/>
+      <Header />
 
       <Row>
         <SideBarDroite />
@@ -252,7 +237,6 @@ function NouvelPublication(props) {
               />
             </Space>
             <Divider type="vertical" />
-        
           </div>
           <Input
             className="description"
@@ -284,7 +268,5 @@ function NouvelPublication(props) {
 function mapStateToProps(state) {
   return { token: state.token };
 }
-
-
 
 export default connect(mapStateToProps, null)(NouvelPublication);

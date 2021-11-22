@@ -24,14 +24,11 @@ import {
 import SideBarDroite from "./Components/SideBarDroite";
 import Carousel from "react-bootstrap/Carousel";
 import Button from "react-bootstrap/Button";
-import Header from "./Components/Header"
-
+import Header from "./Components/Header";
 
 const { Content, Footer } = Layout;
 
 const { TabPane } = Tabs;
-
-
 
 //questions aléatoires
 const listData = [];
@@ -41,9 +38,8 @@ for (let i = 0; i < 3; i++) {
     title: `THEME ${i + 1}`,
     avatar: "https://joeschmoe.io/api/v1/random",
     description: "sous-theme ou tag perso",
-    content:
-      "",
-    key: {i},
+    content: "",
+    key: { i },
   });
 }
 
@@ -54,17 +50,11 @@ const IconText = ({ icon, text }) => (
   </Space>
 );
 
-
-
 function Accueil(props) {
   const [latest, setLatest] = useState([]);
   const [allPublications, setAllPublications] = useState([]);
   const [populaires, setPopulaires] = useState([]);
   const [votes, setVotes] = useState([]);
-  
-
-
- 
 
   //Récupération des 3 publications du carroussel à l'initialisation
   useEffect(() => {
@@ -93,47 +83,45 @@ function Accueil(props) {
       const response = await listPublications.json();
       console.log("all: ", response.allPublications);
       setAllPublications(response.allPublications);
-    
-      
     };
     allPublications();
   }, []);
-
-
-
-
-
-
-
 
   var publiCards = latest.map((publication, i) => {
     var toRead = publication;
     return (
       <Carousel.Item key={i}>
-        <img style={{
-        display: "flex",
-        flexDirection: "column",
-        justifyContent:"center",
-        width: "50px",
-        height: "400px",
-      }}
+        <img
+          style={{
+            display: "flex",
+            flexDirection: "column",
+            justifyContent: "center",
+            width: "50px",
+            height: "400px",
+          }}
           className="d-block w-100"
           src={publication.image}
           alt="First slide"
         />
-        <Carousel.Caption
-        >
-          <h3  style={{
-            display: "flex",
-            flexDirection: "column",
-            justifyContent:"start",
-            backgroundColor:"#edc5c4",
-            alignItems : "center",
-            
-          }}>{publication.titre}</h3>
-         
-          <Link class="btn btn-danger" role="button" to={`/publication/${toRead._id}`}>
-              VOIR
+        <Carousel.Caption>
+          <h3
+            style={{
+              display: "flex",
+              flexDirection: "column",
+              justifyContent: "start",
+              backgroundColor: "#edc5c4",
+              alignItems: "center",
+            }}
+          >
+            {publication.titre}
+          </h3>
+
+          <Link
+            class="btn btn-danger"
+            role="button"
+            to={`/publication/${toRead._id}`}
+          >
+            VOIR
           </Link>
         </Carousel.Caption>
       </Carousel.Item>
@@ -144,33 +132,40 @@ function Accueil(props) {
     var toRead = publication;
     return (
       <Carousel.Item>
-      <img style={{
-        display: "flex",
-        flexDirection: "column",
-        justifyContent:"center",
-        width: "50px",
-        height: "400px",
-      }}
-        className="d-block w-100"
-        src={publication.image}
-        alt="First slide"
-      />
-      <Carousel.Caption
-      >
-        <h3  style={{
-          display: "flex",
-          flexDirection: "column",
-          justifyContent:"start",
-          backgroundColor:"#edc5c4",
-          alignItems : "center",
-          
-        }}>{publication.titre}</h3>
-      
-        <Link class="btn btn-danger" role="button" to={`/publication/${toRead._id}`}>
+        <img
+          style={{
+            display: "flex",
+            flexDirection: "column",
+            justifyContent: "center",
+            width: "50px",
+            height: "400px",
+          }}
+          className="d-block w-100"
+          src={publication.image}
+          alt="First slide"
+        />
+        <Carousel.Caption>
+          <h3
+            style={{
+              display: "flex",
+              flexDirection: "column",
+              justifyContent: "start",
+              backgroundColor: "#edc5c4",
+              alignItems: "center",
+            }}
+          >
+            {publication.titre}
+          </h3>
+
+          <Link
+            class="btn btn-danger"
+            role="button"
+            to={`/publication/${toRead._id}`}
+          >
             VOIR
-        </Link>
-      </Carousel.Caption>
-    </Carousel.Item>
+          </Link>
+        </Carousel.Caption>
+      </Carousel.Item>
     );
   });
 
@@ -180,25 +175,18 @@ function Accueil(props) {
       // Recup articles les plus récents
       const votes = await fetch("/allVotes");
       const body = await votes.json();
-      
+
       // console.log("3 articles", body.latest);
       setVotes(body.allVotes);
-      console.log(body)
+      console.log(body);
     };
     findVotes();
   }, []);
 
- 
- 
-
   return (
-
-
-
     /* header */
-    <Layout className='layout' style={{ margin: 10, backgroundColor:'white'}}>
-      
-      <Header/>
+    <Layout className="layout" style={{ margin: 10, backgroundColor: "white" }}>
+      <Header />
 
       <Layout className="site-layout-background">
         <SideBarDroite />
@@ -221,7 +209,6 @@ function Accueil(props) {
               justify="start"
               span={12}
               style={{
-
                 backgroundColor: "transparent",
                 textAlign: "center",
                 marginTop: "70px",
@@ -229,16 +216,21 @@ function Accueil(props) {
             >
               <h3> Votre publication interesse-t-elle du monde ?</h3>
               <p>
-              La proposition d'Agora c'est  :<br/>
-- d’être acteurs du débat, plutôt que consommateurs passifs. <br/>
-- de contribuer de manière positive en proposant des sujets de débat ou proposer des solutions. <br/>
-- d’exprimer son opinion à travers un seul vote et un seul commentaire réfléchis.<br/>
-- une interface simple d’utilisation et, pour ceux qui n’ont pas le temps de rédiger, un moyen très rapide de faire passer son message.<br/>
-
-Cette solution permet à l’issue de chaque question de :<br/>
-- mettre en évidence l’avis de la majorité avec des chiffres à l’appui,<br/>
-- connaître et comprendre les avis des autres
-
+                La proposition d'Agora c'est :<br />- d’être acteurs du débat,
+                plutôt que consommateurs passifs. <br />
+                - de contribuer de manière positive en proposant des sujets de
+                débat ou proposer des solutions. <br />
+                - d’exprimer son opinion à travers un seul vote et un seul
+                commentaire réfléchis.
+                <br />
+                - une interface simple d’utilisation et, pour ceux qui n’ont pas
+                le temps de rédiger, un moyen très rapide de faire passer son
+                message.
+                <br />
+                Cette solution permet à l’issue de chaque question de :<br />
+                - mettre en évidence l’avis de la majorité avec des chiffres à
+                l’appui,
+                <br />- connaître et comprendre les avis des autres
               </p>
               <div id="ical">
                 <DownCircleFilled
@@ -251,9 +243,7 @@ Cette solution permet à l’issue de chaque question de :<br/>
                 />
               </div>
             </Col>
-            <Col id="illustration2" span={12}>
-              
-            </Col>
+            <Col id="illustration2" span={12}></Col>
           </Row>
           <Row justify="center">
             <Col span="2"></Col>
@@ -286,16 +276,11 @@ Cette solution permet à l’issue de chaque question de :<br/>
               pageSize: 3,
             }}
             dataSource={allPublications}
-            footer={
-              <div>
-               
-              </div>
-            }
+            footer={<div></div>}
             renderItem={(publication) => (
               <List.Item
                 key={publication.titre}
                 actions={[
-                 
                   <IconText
                     icon={LikeOutlined}
                     text="156"
@@ -307,10 +292,16 @@ Cette solution permet à l’issue de chaque question de :<br/>
                     key="list-vertical-message"
                   />,
                 ]}
-                extra={<img width="272" height="150" alt="logo" src={publication.image} />}
+                extra={
+                  <img
+                    width="272"
+                    height="150"
+                    alt="logo"
+                    src={publication.image}
+                  />
+                }
               >
                 <List.Item.Meta
-                 
                   title={
                     <Link to={`/publication/${publication._id}`}>
                       {publication.titre}
@@ -401,7 +392,6 @@ Cette solution permet à l’issue de chaque question de :<br/>
                     value={allPublications.length}
                     valueStyle={{ color: "#3f8600" }}
                     suffix={<EditFilled />}
-                    
                   />
                 </Card>
               </Col>
@@ -456,8 +446,8 @@ Cette solution permet à l’issue de chaque question de :<br/>
         <BackTop />
       </>
     </Layout>
-  );}
-
+  );
+}
 
 function mapStateToProps(state) {
   return { token: state.token };
@@ -468,7 +458,6 @@ function mapDispatchToProps(dispatch) {
     goToPublication: function (toRead) {
       dispatch({ type: "readPublication", selectPublication: toRead });
     },
-   
   };
 }
 
