@@ -26,7 +26,7 @@ router.post('/sendComment', async function(req, res, next){
       }
     // }
   
-    res.json(result, commentSave)
+    res.json(result)
   })
 
   var id;

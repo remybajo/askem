@@ -34,7 +34,7 @@ router.get('/populaires', async function(req, res, next){
     {$limit: 3 }
     ]);
 
-  console.log("see rank: ", rank)
+  //console.log("see rank: ", rank)
 
   var topPublications = [];
   for (var i=0; i<rank.length; i++) {
@@ -55,7 +55,6 @@ router.get('/allPublications', async function(req, res, next){
  
   if(allPublications){
       result = true
-      
     }
 
     

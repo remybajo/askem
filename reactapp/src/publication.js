@@ -47,7 +47,7 @@ function Publication(props) {
  // var newComment = {};
  // var topComments = []
 
-  const [idC, setIdC] = useState(0)
+  //const [idC, setIdC] = useState(0)
 
 
   const { TextArea } = Input;
@@ -80,10 +80,11 @@ function Publication(props) {
   // grosse requete qui va récupérer tout ce dont on a besoin pour la page publication (la publication sur laquelle on a cliqué, les commentaires et les votes les données de l'utilisateur pour savoir si il 
   //a un token, si il a un token on récupère son vote et son commentaire)
   const getSelectedPublication = async () => {
+    
     const publication = await fetch(`/publications/selectedPublication?id=${id}&token=${token}`)
     var body = await publication.json();
 
-    //récupérer la publication
+    //récupérer la publication. Publitodisplay est la publication sélectionnée et recherché par id
     setContent(body.publiToDisplay);
 
     // si l'utilisateur n'est pas loggé, cacher des éléments. On met a jour connected pour afficher ce qui doit etre affiché ou pas.

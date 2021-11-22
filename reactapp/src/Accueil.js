@@ -42,7 +42,7 @@ for (let i = 0; i < 3; i++) {
     avatar: "https://joeschmoe.io/api/v1/random",
     description: "sous-theme ou tag perso",
     content:
-      "We supply a series of design principles, practical patterns and high quality design resources (Sketch and Axure), to help people create their product prototypes beautifully and efficiently.",
+      "",
     key: {i},
   });
 }
@@ -66,7 +66,7 @@ function Accueil(props) {
 
  
 
-  //Récupération les publications à l'initialisation
+  //Récupération des 3 publications du carroussel à l'initialisation
   useEffect(() => {
     const findPublications = async () => {
       // Recup articles les plus récents
@@ -74,11 +74,11 @@ function Accueil(props) {
       const body = await publications.json();
       // console.log("3 articles", body.latest);
       setLatest(body.latest);
-      console.log(body);
+      //console.log(body);
     };
     findPublications();
 
-    //recup articles les plus populaires
+    //recup articles des trois articles les plus populaire plus populaires
     const popPublications = async () => {
       const plusPopulaires = await fetch("publications/populaires");
       const res_populaires = await plusPopulaires.json();
