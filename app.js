@@ -3,7 +3,7 @@ var express = require('express');
 var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
-
+import React, { Component } from 'react';
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
 var votesRouter = require('./routes/votes');
@@ -12,6 +12,21 @@ var commentsRouter = require('./routes/comments');
 
 require('./models/connection')
 var app = express();
+
+class App extends Component {
+  static propTypes = {
+    children: PropTypes.node
+  }
+  
+  render() {
+    const { children } = this.props
+    return (
+      <div>
+        {children}
+      </div>
+    )
+  }
+  }
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));

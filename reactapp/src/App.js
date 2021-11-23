@@ -1,5 +1,5 @@
-import React from "react";
-import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
+import React, {Component} from "react";
+import { BrowserRouter as Router, Switch, Route} from "react-router-dom";
 
 import "./App.css"
 
@@ -19,6 +19,7 @@ import piedDePage from "./Components/piedDePage";
 
 
 
+
 const store = createStore(combineReducers({ token, commentairesList}));
 
 function App(props) {
@@ -28,7 +29,7 @@ function App(props) {
       <Router>
         <Switch>
         <Route component={Accueil} path="/" exact />
-         <Route component= {Validation} path="/validation/:email" exacte />
+         <Route component= {Validation} path="/validation/:email" exact />
           <Route component={PageProfil} path="/pageprofil" exact />
           <Route component={Profilcomp} path="/profilcomp" exact />
           <Route component={Publication} path="/publication/:id" exact />
