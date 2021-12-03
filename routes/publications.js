@@ -49,6 +49,7 @@ router.get('/populaires', async function(req, res, next){
 
 })
 
+//utilisé pour mettre des articles aléatoires en page d'accueil
 router.get('/allPublications', async function(req, res, next){
   var result = false;
   var allPublications = await publicationModel.find().sort({date_publication: -1});
@@ -62,7 +63,7 @@ router.get('/allPublications', async function(req, res, next){
 
 })
 
-
+//la grosse route utilisée dans la page publication
 router.get('/selectedPublication', async function(req, res, next){
   var id;
   console.log("req.query ",req.query)
@@ -180,7 +181,7 @@ router.post('/post-publication', async function(req, res, next){
       texte: req.body.contenuPublication,
       image: req.body.image,
       date_publication: req.body.datePublication,
-      statut: false,
+      statut: false, 
       motsCle: req.body.motClePublication,
       user_id: idd,
     })

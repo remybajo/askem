@@ -17,7 +17,7 @@ router.post('/sign-up', async function (req, res, next) {
 
   var result = false
   var saveUser = null
- 
+  var token = null
 
   const data = await userModel.findOne({
     email: req.body.emailFromFront
@@ -45,7 +45,9 @@ router.post('/sign-up', async function (req, res, next) {
       username: req.body.usernameFromFront,
       email: req.body.emailFromFront,
       password: hash,
-  
+      token: uid2(32),
+     
+     
     })
 
     saveUser = await newUser.save()
@@ -53,12 +55,12 @@ router.post('/sign-up', async function (req, res, next) {
 
     if (saveUser) {
       result = true
-     
+      token = saveUser.token
     }
   }
 
 
-  res.json({ result, saveUser, error})
+  res.json({ result, saveUser, error, token })
 })
 
 router.post('/sign-in', async function (req, res, next) {

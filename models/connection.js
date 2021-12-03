@@ -1,6 +1,6 @@
 var mongoose = require('mongoose');
 
-const URL_BDD = `mongodb+srv://agora:agora159@agora.1xrxc.mongodb.net/agora?retryWrites=true&w=majority`
+const URL_BDD = `mongodb+srv://remybajo:Marseille13!@cluster0.yl9rz.mongodb.net/myFirstDatabase?retryWrites=true&w=majority`
 
 var options = {
     connectTimeoutMS: 5000,

@@ -19,7 +19,7 @@ import { Card, CardImg, CardText, CardBody, CardTitle } from "reactstrap";
 
 import SideBarDroite from "./Components/SideBarDroite";
 
-import Politique from "../src/image/Politique.jpg";
+import LFI from "../src/image/LFI.jpeg";
 import Education from "../src/image/Education.jpg";
 import Emploi from "../src/image/Emploi.jpg";
 import Environnement from "../src/image/Environnement.jpg";
@@ -43,7 +43,6 @@ function NouvelPublication(props) {
 
   const [titre, setTitre] = useState("");
   const [contenu, setContenu] = useState("");
-  const [motCle, setMotCle] = useState([]);
   const [date, setDate] = useState();
   const [theme, setTheme] = useState();
   const [redir, setRedir] = useState(false);
@@ -69,13 +68,13 @@ function NouvelPublication(props) {
 
   useEffect(() => {
     imageP();
-  }, [theme]);
+  }, [image]);
 
   var postPublication = async () => {
     const data = await fetch("/publications/post-publication", {
       method: "POST",
       headers: { "Content-Type": "application/x-www-form-urlencoded" },
-      body: `titrePublication=${titre}&contenuPublication=${contenu}&datePublication=${date}&themePublication=${theme}&motClePublication=${motCle}&token=${props.token}&image=${image}`,
+      body: `titrePublication=${titre}&contenuPublication=${contenu}&datePublication=${date}&themePublication=${theme}&token=${props.token}&image=${image}`,
     });
 
     const body = await data.json();
@@ -90,10 +89,16 @@ function NouvelPublication(props) {
     return <Redirect to={`/publication/${id}`} />;
   }
 
+  const partis = [
+    {
+      value: "LFI",
+      label: "LFI",
+    },]
+
   const options = [
     {
-      value: "Politique",
-      label: "Politique",
+      value: "Politique Exterrieure",
+      label: "Politique Exterrieure",
     },
     {
       value: "Education",
@@ -108,50 +113,47 @@ function NouvelPublication(props) {
       label: "Environnement",
     },
     {
-      value: "Evenement",
-      label: "Evenement",
+      value: "Economie",
+      label: "Economie",
     },
     {
-      value: "Sport",
-      label: "Sport",
+      value: "Politique Intérrieure",
+      label: "Politique Intérrieure",
     },
-    {
-      value: "Tourisme",
-      label: "Tourisme",
-    },
-    {
-      value: "Remarquer",
-      label: "Tas remarqué?",
-    },
-    {
-      value: "Nutrition",
-      label: "Nutrition",
-    },
+  
     {
       value: "Santé",
       label: "Santé",
     },
-    {
-      value: "Technologie",
-      label: "Technologie",
-    },
+  
     {
       value: "Transport",
       label: "Transport",
     },
-  ];
+    {
+      value: "Culture",
+      label: "Culture",
+    },
+    {
+      value: "Agriculture et Alimentation",
+      label: "Agriculture et Alimentation",
+    },
+    {
+      value: "Social",
+      label: "Social",
+    }];
 
   function onChange(value) {
     var thematique = value;
     setTheme(thematique);
   }
 
-  const onSearch = (value) => {
-    var listeMotCle = motCle;
-    listeMotCle.push(value);
-    setMotCle(listeMotCle);
-  };
+  function onParti(value) {
+    var image = value;
+    setImage(image);
+  }
 
+  
   // if (pictureSelected && validatePicture) {
   var illustration = (
     <Card style={{ width: "640px", height: "360px" }}>
@@ -170,29 +172,29 @@ function NouvelPublication(props) {
   // }
 
   var imageP = () => {
-    if (theme == "Politique") {
-      setImage(Politique);
-    } else if (theme == "Education") {
+    if (image == "Education") {
       setImage(Education);
-    } else if (theme == "Environnement") {
+    } else if (image == "Education") {
+      setImage(Education);
+    } else if (image == "Environnement") {
       setImage(Environnement);
-    } else if (theme == "Emploi") {
+    } else if (image == "Emploi") {
       setImage(Emploi);
-    } else if (theme == "Evenement") {
+    } else if (image == "Evenement") {
       setImage(Evenement);
-    } else if (theme == "Remarquer") {
+    } else if (image == "Remarquer") {
       setImage(Remarquer);
-    } else if (theme == "Sport") {
+    } else if (image == "Sport") {
       setImage(Sport);
-    } else if (theme == "Tourisme") {
+    } else if (image == "Tourisme") {
       setImage(Tourisme);
-    } else if (theme == "Nutrition") {
+    } else if (image == "Nutrition") {
       setImage(Nutrition);
-    } else if (theme == "Santé") {
+    } else if (image == "Santé") {
       setImage(Santé);
-    } else if (theme == "Technologie") {
+    } else if (image == "Technologie") {
       setImage(Technologie);
-    } else if (theme == "Transport") {
+    } else if (image == "Transport") {
       setImage(Transport);
     }
   };
@@ -228,13 +230,21 @@ function NouvelPublication(props) {
             <Divider type="vertical" />
 
             <Space direction="vertical">
-              <Search
-                placeholder="exemple: cantine/ école primaire"
-                allowClear
-                enterButton="Ajouter un mot-clé"
-                size="large"
-                onSearch={onSearch}
-              />
+             
+            </Space>
+            <Divider type="vertical" />
+          </div>
+          <div className="maflex">
+            <Cascader
+              className="cascade"
+              options={options}
+              onChange={onParti}
+              placeholder="Parti"
+            />
+            <Divider type="vertical" />
+
+            <Space direction="vertical">
+             
             </Space>
             <Divider type="vertical" />
           </div>
