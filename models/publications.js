@@ -7,7 +7,7 @@ const publicationSchema = mongoose.Schema({
     image: String,
     date_publication: String,
     statut: Boolean,
-    motsCle: String,
+    parti: String,
     user_id: { type: mongoose.Schema.Types.ObjectId, ref: 'users' },
 })
 

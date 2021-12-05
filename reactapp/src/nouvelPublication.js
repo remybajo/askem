@@ -19,21 +19,23 @@ import { Card, CardImg, CardText, CardBody, CardTitle } from "reactstrap";
 
 import SideBarDroite from "./Components/SideBarDroite";
 
-import LFI from "../src/image/LFI.jpeg";
-import Education from "../src/image/Education.jpg";
-import Emploi from "../src/image/Emploi.jpg";
-import Environnement from "../src/image/Environnement.jpg";
-import Evenement from "../src/image/Evenement.jpg";
-import Remarquer from "../src/image/Remarquer.jpg";
-import Sport from "../src/image/Sport.jpg";
-import Tourisme from "../src/image/Tourisme.jpg";
+import LAREM from "../src/image/LAREM.png"
+import LO from "../src/image/LO.png";
+import LFI from "../src/image/LFI.png";
+import LR from "../src/image/LR.png";
+import EELV from "../src/image/EELV.png";
+import MD from "../src/image/MD.png";
+import PCF from "../src/image/PCF.png";
+import PRG from "../src/image/PRG.png";
+import PS from "../src/image/PS.png";
+import RN from "../src/image/RN.png";
+import UDI from "../src/image/UDI.png";
+import NPA from "../src/image/NPA.png";
+
 import PiedDePage from "./Components/piedDePage";
 
 import Header from "./Components/Header";
-import Nutrition from "../src/image/Nutrition.jpg";
-import Santé from "../src/image/Santé.jpg";
-import Technologie from "../src/image/Technologie.jpg";
-import Transport from "../src/image/Transport.jpg";
+
 
 const { Footer, Sider, Content } = Layout;
 const { Search } = Input;
@@ -46,6 +48,7 @@ function NouvelPublication(props) {
   const [date, setDate] = useState();
   const [theme, setTheme] = useState();
   const [redir, setRedir] = useState(false);
+  const [parti, setParti]=useState("");
 
   // hook d'état pour gestion de l'image
   const [id, setId] = useState();
@@ -68,13 +71,13 @@ function NouvelPublication(props) {
 
   useEffect(() => {
     imageP();
-  }, [image]);
+  }, [parti]);
 
   var postPublication = async () => {
     const data = await fetch("/publications/post-publication", {
       method: "POST",
       headers: { "Content-Type": "application/x-www-form-urlencoded" },
-      body: `titrePublication=${titre}&contenuPublication=${contenu}&datePublication=${date}&themePublication=${theme}&token=${props.token}&image=${image}`,
+      body: `titrePublication=${titre}&contenuPublication=${contenu}&datePublication=${date}&themePublication=${theme}&parti=${parti}&token=${props.token}&image=${image}`,
     });
 
     const body = await data.json();
@@ -89,11 +92,45 @@ function NouvelPublication(props) {
     return <Redirect to={`/publication/${id}`} />;
   }
 
-  const partis = [
+  const partisImage = [
     {
       value: "LFI",
       label: "LFI",
-    },]
+    },{
+      value: "Lutte ouvrière",
+      label: "Lutte ouvrière",
+    },{
+      value: "Nouveau Parti anticapitaliste" ,
+      label: "Nouveau Parti anticapitaliste",
+    },{
+      value: "Parti communiste français",
+      label: "Parti communiste français",
+    },{
+      value: "Europe Écologie Les Verts",
+      label: "Europe Écologie Les Verts",
+    },{
+      value: "Parti socialiste",
+      label: "Parti socialiste",
+    },{
+      value: "Parti radical de gauche",
+      label: "Parti radical de gauche",
+    },{
+      value: "La République en marche",
+      label: "La République en marche",
+    },{
+      value: "Mouvement démocrate",
+      label: "Mouvement démocrate",
+    },{
+      value: "Union des démocrates et indépendants",
+      label: "Union des démocrates et indépendants",
+    },{
+      value: "Les Républicains",
+      label: "Les Républicains",
+    },{
+      value: "Rassemblement national",
+      label: "Rassemblement national",
+    },
+ ]
 
   const options = [
     {
@@ -149,8 +186,8 @@ function NouvelPublication(props) {
   }
 
   function onParti(value) {
-    var image = value;
-    setImage(image);
+    var parti = value;
+    setParti(parti);
   }
 
   
@@ -171,32 +208,34 @@ function NouvelPublication(props) {
   );
   // }
 
+  
+
   var imageP = () => {
-    if (image == "Education") {
-      setImage(Education);
-    } else if (image == "Education") {
-      setImage(Education);
-    } else if (image == "Environnement") {
-      setImage(Environnement);
-    } else if (image == "Emploi") {
-      setImage(Emploi);
-    } else if (image == "Evenement") {
-      setImage(Evenement);
-    } else if (image == "Remarquer") {
-      setImage(Remarquer);
-    } else if (image == "Sport") {
-      setImage(Sport);
-    } else if (image == "Tourisme") {
-      setImage(Tourisme);
-    } else if (image == "Nutrition") {
-      setImage(Nutrition);
-    } else if (image == "Santé") {
-      setImage(Santé);
-    } else if (image == "Technologie") {
-      setImage(Technologie);
-    } else if (image == "Transport") {
-      setImage(Transport);
-    }
+    if (parti == "LFI") {
+      setImage(LFI);
+    } else if (parti == "Lutte ouvrière") {
+      setImage(LO);
+    } else if (parti == "Nouveau Parti anticapitaliste") {
+      setImage(NPA);
+    } else if (parti == "Parti communiste français") {
+      setImage(PCF);
+    } else if (parti == "Europe Écologie Les Verts") {
+      setImage(EELV);
+    } else if (parti == "Parti socialiste") {
+      setImage(PS);
+    } else if (parti == "Parti radical de gauche") {
+      setImage(PRG);
+    } else if (parti == "La République en marche") {
+      setImage(LAREM);
+    } else if (parti == "Mouvement démocrate") {
+      setImage(MD);
+    } else if (parti == "Union des démocrates et indépendants") {
+      setImage(UDI);
+    } else if (parti == "Les Républicains") {
+      setImage(LR);
+    } 
+    else if (parti == "Rassemblement National") {
+      setImage(RN);}
   };
 
   return (
@@ -237,7 +276,7 @@ function NouvelPublication(props) {
           <div className="maflex">
             <Cascader
               className="cascade"
-              options={options}
+              options={partisImage}
               onChange={onParti}
               placeholder="Parti"
             />

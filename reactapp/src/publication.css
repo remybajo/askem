@@ -31,7 +31,7 @@ h3 {
 /* statistique page profil*/
   .site-statistic-demo-card-2 {
     padding: 30px;
-    background: #C9F6F5;
+    background:white;
     border-radius: "30px",
   }
     [data-theme="dark"] .site-statistic-demo-card {
@@ -92,7 +92,7 @@ filter: brightness(50%);
 }
 .ant-pagination-item-active {
   font-weight: 500;
-  background: #fff;
+  background: white;
   border-color: #214C74;
 }
 
@@ -239,7 +239,7 @@ h4 {
 #components-tabs-demo-card-top .code-box-demo {
   padding: 24px;
   overflow: hidden;
-  background: #f5f5f5;
+  background: white;
 }
 [data-theme='compact'] .card-container > .ant-tabs-card .ant-tabs-content {
   height: 120px;

@@ -20,6 +20,7 @@ import "./publication.css";
 import SideBarDroite from "./Components/SideBarDroite";
 import Header from "./Components/Header";
 import Commentaires from "./Components/commentaires";
+import point from "../src/image/point.jpeg"
 
 function Publication(props) {
   const { Footer, Content } = Layout;
@@ -48,11 +49,11 @@ function Publication(props) {
   const [gender, setGender] = useState();
 
   const [listVotes, setListVotes] = useState([
-    { vote: "J'Adore", color: "#33EE22", border: "" },
-    { vote: "Je suis Pour", color: "#93c47d", border: "" },
-    { vote: "Je suis Mitigé(e)", color: "#ffd966", border: "" },
-    { vote: "Je suis Contre", color: "#ffa500", border: "" },
-    { vote: "Je Déteste", color: "#f44336", border: "" },
+    { vote: "Adore", color: "#33EE22", border: "" },
+    { vote: "Pour", color: "#93c47d", border: "" },
+    { vote: "Mitigé.e", color: "#ffd966", border: "" },
+    { vote: "Contre", color: "#ffa500", border: "" },
+    { vote: "Déteste", color: "#f44336", border: "" },
   ]);
 
   // Sert si on utilise le reducer
@@ -397,10 +398,13 @@ function Publication(props) {
               {content.titre}
             </h1>
 
-            <div
+            <div style={{display:"flex"}} >
+              {alreadyVoted == true ? (
+               <div
               style={{
                 display: "flex",
                 flexDirection: "row",
+                justifyContent:"space-between",
                 marginLeft: "50px",
                 marginRight: "50px",
                 textAlign: "center",
@@ -413,36 +417,85 @@ function Publication(props) {
                 src={content.image}
                 style={{ width: "30%", margin: 5, position: "relative" }}
               />
-            </div>
+               
+                </div>
+              ) : (
+                <div
+                style={{
+                  display: "flex",
+                  flexDirection: "row",
+                  justifyContent:"space-between",
+                  marginLeft: "50px",
+                  marginRight: "50px",
+                  textAlign: "center",
+                }}
+              >
+                <p style={{ fontWeight: "bold", color: "grey" }}>
+                  {content.texte}
+                </p>
+                <img
+                  src={point}
+                  style={{ width: "50%", margin: 5, position: "relative" }}
+                />
+                 
+                  </div>
+              )}
+              </div>
+           
 
-            <div
-              span={7}
-              className="gutter-row"
-              style={{
+          
+              
+            <div style={{display:"flex"}} >
+              {alreadyVoted == true ? (
+                <div style={{ display: "flex",
+                flexDirection: "row",
+                justifyContent:"center",
+                alignItems: "center",
+                padding: 5,
                 margin: 5,
-                padding: 15,
-                height: "100%",
-                width: "100%",
-                display: "flex",
-                flexDirection: "column",
-                justifyContent: "center",
-              }}
-            >
-              {alreadyVoted ? (
+                width: "100%"}}>
+                  <p
+                    style={{
+                      fontSize: 20,
+                      fontStyle: "italic",
+                      textAlign: "center",
+                    }}
+                  >
+                    Vous avez voté
+                  </p>
+                  <p
+                    style={{
+                      padding: 10,
+                      fontWeight: "bold",
+                      fontStyle: "normal",
+                      color: "orange",
+                      fontSize: 20,
+                    }}
+                  >
+                    {userVote}
+                  </p>
+                </div>
+              ) : (
+                ""
+              )}
+               {alreadyVoted ? (
                 <div
                   style={{
                     display: "flex",
-                    flexDirection: "column",
-                    alignItems: "center",
+                    flexDirection: "row",
+                    justifyContent:"center",
+                    alignItems: "flex-start",
+                    height:"300px"
+                   
                   }}
                 >
-                  <h2 style={{ color: "#37A4B2" }}>Résultat du Vote</h2>
+
                   <Plot
                     data={data}
                     config={{ displayModeBar: false }}
                     layout={{
-                      width: "380",
-                      height: "380",
+                      width: "350",
+                      height: "350",
                       title: `Nbre total de Votants: ${nbVoters}`,
                       paper_bgcolor: "#F2F3F4",
                       legend: { orientation: "h", side: "top" },
@@ -453,8 +506,8 @@ function Publication(props) {
                   />
                 </div>
               ) : (
-               <div style={{ display : "flex", flexDirection:"column", alignItems:"center", width:"100%" }}>
-                   <h2 style={{ color: "#37A4B2" }}>VOTEZ</h2>
+               <div style={{ display : "flex", flexDirection:"row", alignItems:"center", width:"100%" }}>
+                
                    <div
                    style={{
                      width: "100%",
@@ -475,6 +528,8 @@ function Publication(props) {
                           backgroundColor: `${vote.color}`,
                           margin: 10,
                           width:"100%",
+                          width:"120px",
+                          textAlign:"center",
                           fontWeight: "bold",
                           border: `${vote.border}`,
                         }}
@@ -508,48 +563,6 @@ function Publication(props) {
                 </div>
               )}
             </div>
-          </div>
-          <div
-            span={7}
-            className="gutter-row"
-            style={{
-              display: "flex",
-              flexDirection: "column",
-              alignItems: "center",
-              padding: 5,
-              margin: 5,
-              width: "95%",
-             
-            }}
-          >
-            <div style={{ display: "flex" }}>
-              {alreadyVoted == true ? (
-                <div>
-                  <p
-                    style={{
-                      fontSize: 20,
-                      fontStyle: "italic",
-                      textAlign: "center",
-                    }}
-                  >
-                    Vous avez voté
-                  </p>
-                  <p
-                    style={{
-                      padding: 10,
-                      fontWeight: "bold",
-                      fontStyle: "normal",
-                      color: "orange",
-                      fontSize: 30,
-                    }}
-                  >
-                    {userVote}
-                  </p>
-                </div>
-              ) : (
-                ""
-              )}
-            </div>
             <div
               style={{
                 width: "100%",
@@ -568,11 +581,12 @@ function Publication(props) {
                     width: "100%",
                     height: "100%",
                     display: "flex",
-                    flexDirection: "column",
-                    justifyContent: "center",
+                    flexDirection: "row",
+                    justifyContent: "flex-start",
                     alignItems: "center",
                   }}
                 >
+                  <div style={{display:"flex", flexDirection:"row", alignItems:"center"}}>
                   <p> Vous avez commenté</p>
                   <p
                     style={{
@@ -584,6 +598,7 @@ function Publication(props) {
                   >
                     {userComment}
                   </p>
+                  </div>
                   <Button
                     htmlType="submit"
                     onClick="{onSubmit}"
@@ -597,7 +612,7 @@ function Publication(props) {
                   {messageCom}
                 </div>
               ) : (
-                <div style={{ width: "100%" }}>
+                <div style={{ width: "100%", display:"flex", flexDirection:"column", marginTop:"20px" }}>
                   <h5 style={{ color: "#37A4B2" }}>
                     COMMENTEZ CETTE PUBLICATION
                   </h5>
@@ -623,7 +638,10 @@ function Publication(props) {
                 </div>
               )}
             </div>
-          </div>
+          
+             
+            </div>
+        
 
           <Row
             style={{
@@ -631,6 +649,7 @@ function Publication(props) {
               padding: 10,
               width: "100%",
               display: "flex",
+              height:"300px",
               alignItem: "center",
             }}
           >

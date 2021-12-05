@@ -182,7 +182,7 @@ router.post('/post-publication', async function(req, res, next){
       image: req.body.image,
       date_publication: req.body.datePublication,
       statut: false, 
-      motsCle: req.body.motClePublication,
+      parti: req.body.parti,
       user_id: idd,
     })
   
