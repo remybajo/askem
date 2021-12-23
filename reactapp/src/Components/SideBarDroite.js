@@ -25,18 +25,18 @@ function SideBarDroite(props) {
 
   //Base de donnée Data
   const themeData = [
-    "Emploi",
-    "Education",
-    "Politique",
-    "Evenement",
-    "Environnement",
-    "Sport",
-    "Tourisme",
-    "Tu as remarqué ?",
-    "Nutrition",
-    "Santé",
-    "Technologie",
-    "Transport"
+    
+      "Politique Exterrieure",
+      "Education",
+      "Emploi",
+      "Environnement",
+      "Economie",
+      "Politique Intérrieure",
+      "Santé",
+      "Transport",
+      "Culture",
+      "Agriculture et Alimentation",
+      "Social",
   ];
 
 
