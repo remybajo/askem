@@ -1,11 +1,13 @@
 import React, { useState, useEffect, } from "react";
 import { Link } from "react-router-dom";
 import Button from "react-bootstrap/Button";
-import AGORA from "../image/AGORA.png"
+
 import SearchBar from "./SearchBar";
 import Inscription from "./inscription";
 import { connect } from "react-redux";
 import {Image, Modal } from "antd";
+
+
 
 
 function Header(props) {
@@ -56,19 +58,19 @@ function Header(props) {
       >
         <Inscription />{" "}
       </Modal>
-        <div >
-        <div style={{display:"flex", justifyContent:"space-between"}}>
-          <Image
-            preview={false}
-            size={40}
-            className="logo"
-            width={150}
-            src={AGORA}
-          />
-           <div className="searchbar" style={{display:"flex", justifyContent:"center"}}>
-        <SearchBar  placeholder="chercher une publication" data={publicationT}/>
-      </div>
-          <div>
+      
+
+        
+      
+
+        <div style={{display:"flex", justifyContent:"space-between", alignItems:"center"}}>
+           <p style={{ marginLeft: "50px", fontWeight:"bold" }}>
+       
+            Ensemble, créons le programme commun.
+          </p>
+    
+      
+        
             {token == null ?
             <Button  onClick={() => handleClick()}
           size={20}
@@ -79,11 +81,11 @@ function Header(props) {
               borderColor: "#214C74",
             }}
           >
-            LOG IN
+            Connexion
           </Button>
           :
           <div style={{padding:5, fontWeight:'bold', display:'flex'}}>
-            <p style={{padding:5, fontWeight:'bold'}}>Vous êtes connecté(e)</p>
+         
           <Button onClick={() => props.deleteToken(token)}
             type="link"
             type="text"
@@ -92,37 +94,20 @@ function Header(props) {
               backgroundColor: "#214C74",
               borderColor: "#214C74",
             }}
-            ><Link to="/">LOG OUT</Link>
+            ><Link to="/">Déconnexion</Link>
           </Button>
           
           </div>
           }
-            </div>
-            </div>
-          <div>
-           <p style={{ marginLeft: "50px", fontWeight:"bold" }}>
-            {" "}
-            Donnez votre avis d'une manière différente{" "}
-          </p>
+            
+           
           </div>
-        </div>
+        
        
-        <div>
+        <div style={{display:"flex", justifyContent:"center", borderRadius:"100%"}}>
           
          
-          
-          <Button
-            type="primary"
-            size={100}
-            style={{
-              backgroundColor: "rgba(240, 52, 52, 1)",
-              borderColor: "rgba(240, 52, 52, 1)",
-              marginLeft: "50px",
-              boxShadow: "1px 15px 10px grey",
-            }}
-          >
-            Poster votre publication
-          </Button>
+        <SearchBar  placeholder="chercher une proposition" data={publicationT}/>
         </div>
 
         

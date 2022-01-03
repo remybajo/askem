@@ -355,30 +355,30 @@ function Publication(props) {
     {
       values: values,
       labels: labels,
-      type: "pie",
+      type: "bar",
       hoverinfo: "none",
       text: labels,
       hoverinfo: "none",
     },
   ];
 
-  var dataGender = [
-    {
-      values: genderValues,
-      labels: genderLabels,
-      type: "pie",
-      hoverinfo: "none",
-      text: genderLabels,
-      hoverinfo: "none",
-      marker: { colors: ["#FFC806", "#EDAC06"] },
-    },
-  ];
+  // var dataGender = [
+  //   {
+  //     values: genderValues,
+  //     labels: genderLabels,
+  //     type: "pie",
+  //     hoverinfo: "none",
+  //     text: genderLabels,
+  //     hoverinfo: "none",
+  //     marker: { colors: ["#FFC806", "#EDAC06"] },
+  //   },
+  // ];
 
   return (
     <Layout className="layout" style={{ margin: 10, backgroundColor: "white", width:"100%" }}>
       <Header />
 
-      <Layout style={{ height: "100vh" }}>
+      <Layout style={{ height: "100vh", backgroundColor: "white" }}>
         <SideBarDroite />
         <Content>
           <div
@@ -413,10 +413,9 @@ function Publication(props) {
               <p style={{ fontWeight: "bold", color: "grey" }}>
                 {content.texte}
               </p>
-              <img
-                src={content.image}
-                style={{ width: "30%", margin: 5, position: "relative" }}
-              />
+              
+                <p> {content.parti} </p>
+             
                
                 </div>
               ) : (
@@ -671,7 +670,7 @@ function Publication(props) {
                               color: "#37A4B2",
                               fontSize: "150%",
                               textAlign: "center",
-                              backgroundColor: "lightgray",
+                              backgroundColor: "white",
                               width: "100%",
                               height: "100%",
                             }}
@@ -689,7 +688,7 @@ function Publication(props) {
                                   color: "#37A4B2",
                                   fontSize: "150%",
                                   textAlign: "center",
-                                  backgroundColor: "lightgray",
+                                  backgroundColor: "white",
                                   width: "100%",
                                   height: "100%",
                                 }}

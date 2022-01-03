@@ -197,12 +197,11 @@ function NouvelPublication(props) {
       <CardImg
         width="100%"
         height="100%"
-        src={image}
         alt="Pour voir apparaître la photo, choisissez un thème"
       />
       <CardBody>
         <CardTitle tag="h5"></CardTitle>
-        <CardText></CardText>
+        <CardText> {parti}</CardText>
       </CardBody>
     </Card>
   );

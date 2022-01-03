@@ -1,5 +1,5 @@
 import { Link, Redirect } from "react-router-dom";
-import React, { useState, useEffect, useRef } from "react";
+import React, { useState } from "react";
 import Inscription from "./inscription";
 import { connect } from "react-redux";
 import {
@@ -63,7 +63,7 @@ function SideBarDroite(props) {
   });
 
   return (
-    <Sider className="site-layout-background">
+    <Sider >
       <Modal
         style={{ displayflex: 1, width: 150 }}
         visible={isModalVisible}

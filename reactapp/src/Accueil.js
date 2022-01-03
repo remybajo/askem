@@ -195,9 +195,7 @@ function Accueil(props) {
         >
           <Row justify="center">
             <Tabs type="card" style={{ width: 900, height: 600, padding: 15 }}>
-              <TabPane tab="A la une " key="1">
-                <Carousel>{publiCards}</Carousel>
-              </TabPane>
+           
 
               <TabPane tab="Les plus populaires" key="2">
                 <Carousel>{topPublications}</Carousel>
@@ -214,23 +212,15 @@ function Accueil(props) {
                 marginTop: "70px",
               }}
             >
-              <h3> Votre publication interesse-t-elle du monde ?</h3>
+              <h3> Les objectifs du programme populaire </h3>
               <p>
-                La proposition d'Agora c'est :<br />- d’être acteurs du débat,
-                plutôt que consommateurs passifs. <br />
-                - de contribuer de manière positive en proposant des sujets de
-                débat ou proposer des solutions. <br />
-                - d’exprimer son opinion à travers un seul vote et un seul
-                commentaire réfléchis.
-                <br />
-                - une interface simple d’utilisation et, pour ceux qui n’ont pas
-                le temps de rédiger, un moyen très rapide de faire passer son
-                message.
-                <br />
-                Cette solution permet à l’issue de chaque question de :<br />
-                - mettre en évidence l’avis de la majorité avec des chiffres à
-                l’appui,
-                <br />- connaître et comprendre les avis des autres
+                La proposition du programme populaire c'est :<br />- De pouvoir proposer un programme choisit par les citoyens.  <br />
+                - De sortir d'une logique de candidat pour rentrer dans une logique de programme. <br />
+                - De prôner un programme qui transcende les partis
+             
+            
+              
+                <br /> Nous nous engageons à publier les resultats en temps rééls et en tout transparence.
               </p>
               <div id="ical">
                 <DownCircleFilled
@@ -261,7 +251,7 @@ function Accueil(props) {
                   borderRadius: "30px",
                 }}
               >
-                Toutes les Publications
+                Propositions aléatoires
               </h1>
             </Col>
             <Col span="2"></Col>
@@ -322,52 +312,8 @@ function Accueil(props) {
               marginBottom: "60px",
             }}
           >
-            <Col
-              span={12}
-              style={{
-                color: "black",
-                backgroundColor: "transparent",
-                textAlign: "center",
-                padding: "20px",
-              }}
-            >
-              {" "}
-              <h3
-                style={{
-                  color: "black",
-                }}
-              >
-                {" "}
-                Votre publication interesse-t-elle du monde ?
-              </h3>
-              <p>
-                Découvrez les avis des autres utilisateurs... Lorem Ipsum is
-                simply dummy text of the printing and typesetting industry.
-              </p>
-            </Col>
-
-            <Col
-              span={12}
-              style={{
-                backgroundColor: "transparent",
-                textAlign: "center",
-                align: "middle",
-              }}
-            >
-              <Button
-                type="primary"
-                size={100}
-                style={{
-                  backgroundColor: "#0E9C98",
-                  borderColor: "#0E9C98",
-                  borderRadius: "30px",
-                  marginLeft: "50px",
-                  marginTop: "60px",
-                }}
-              >
-                Crée ton profil <SolutionOutlined />
-              </Button>
-            </Col>
+            
+           
           </Row>
           <div
             className="site-statistic-demo-card"
@@ -382,7 +328,7 @@ function Accueil(props) {
               }}
             >
               {" "}
-              ILs ont donné leur avis...
+              Ils ont donné voté...
             </h3>
             <Row gutter={16}>
               <Col span={12}>
@@ -409,39 +355,7 @@ function Accueil(props) {
           </div>
         </Content>
       </Layout>
-      <Footer className="footer" style={{ textAlign: "left" }}>
-        {" "}
-        <Row>
-          <Col span={8}>
-            NOTRE GROUPE
-            <ul className="un">
-              <li>A propos</li>
-              <li>Notre vision</li>
-              <li>Contact</li>
-            </ul>
-          </Col>
-          <Col span={8}>
-            {" "}
-            ASSISTANCE
-            <ul className="un">
-              <li>Aide</li>
-              <li>Guide</li>
-              <li>Mentions legales</li>
-              <li>CGU</li>
-              <li>Cookies</li>
-            </ul>
-          </Col>
-          <Col span={8}>
-            {" "}
-            RESEAUX SOCIAUX
-            <ul className="un">
-              <li>Facebook</li>
-              <li>Instagram</li>
-              <li>Twitter</li>
-            </ul>
-          </Col>
-        </Row>
-      </Footer>
+     
       <>
         <BackTop />
       </>

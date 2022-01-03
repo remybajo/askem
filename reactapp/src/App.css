@@ -3,18 +3,11 @@
 #head {
   display: flex;
   flex-direction: column;
-  background-image: url("./image/language-school-illustration-13-1400x411.png");
-background-image: url("./image/language-school-illustration-13-1400x411.png");
-  height: 230px;
+background-color: #e97a66;
+  height: 130px;
   margin-bottom: 30px;
  
 }
-#illustration2 {
-  background-image: url("./image/language-school-illustration-01.png");
-  height: 600px;
-
-}
-
 
 
 
@@ -26,7 +19,7 @@ h3 {
 /* statistique */
 .site-statistic-demo-card {
   padding: 30px;
-  background: #0A1C37;
+  background:#0A1C37;
   border-radius: "30px",
 }
   [data-theme="dark"] .site-statistic-demo-card {
@@ -42,17 +35,9 @@ h3 {
       background: #303030;
     }
 
-.footer {
 
- height: 400px;
-filter: brightness(50%);
-  }
- 
   
 
-.logo {
-  padding-left: 50px;
-}
 .site-layout-background {
   
  
